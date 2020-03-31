@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world");
         
-        port(4569);
+        port(4566);
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
 
