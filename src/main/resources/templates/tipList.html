@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lukuvinkki</title>
+    </head>
+    <body>
+        
+        <h2>All tips</h2>
+        <ul>
+            <li th:each="tip : ${tips}">
+                Title: <span th:text="${tip.title}">title</span> <br/>
+                Author: <span th:text="${tip.author}">author</span><br/>
+                Description: <span th:text="${tip.description}">description</span> <br/>
+                Checked: <span th:text="${tip.checked}">checked</span> <br/>
+
+                <!--<a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a>-->
+            </li>
+        </ul>
+
+        <h2>Add a new tip</h2>
+        <form method="POST">
+            Title: <input type="text" name="title"/> <br/>
+            Author: <input type="text" name="author"/> <br/>
+            Description: <input type="text" name="description"/> <br/>
+            Url: <input type="text" name="url"/>
+            <input type="submit" value="Add"/>
+        </form>
+    </body>
+</html>
