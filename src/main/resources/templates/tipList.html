@@ -1,29 +1,67 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
     <head>
         <title>Lukuvinkki</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
+        <nav class="navbar navbar-expand-sm bg-success navbar-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Home</a>
+				</li>
+                <li class="nav-item active">
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/list}">Add a tip</a>
+                </li>
+            </ul>
+        </nav>
+        <h2>Kaikki lukuvinkit</h2>
         
-        <h2>All tips</h2>
-        <ul>
-            <li th:each="tip : ${tips}">
-                Title: <span th:text="${tip.title}">title</span> <br/>
-                Author: <span th:text="${tip.author}">author</span><br/>
-                Description: <span th:text="${tip.description}">description</span> <br/>
-                Checked: <span th:text="${tip.checked}">checked</span> <br/>
+        <table class="table table-bordered" style="margin-top: 20px;">
+			<tbody>
+				<thead class="thead-dark">
+					<tr>
+						<th>Otsikko</th>
+						<th>Kirjoittaja</th>
+						<th>Kuvaus</th>
+						<th>Luettu</th>
+						<!-- <td></td> -->
+					</tr>
+				</thead>
+				<tr th:each="tip : ${tips}">
+					<td th:text="${tip.title}">title</td>
+					<td th:text="${tip.author}">author</td>
+					<td th:text="${tip.description}">description</td>
+					<td th:text="${tip.checked}">checked</td>
+					<!-- <td> <a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a> </td> -->
+				</tr>
+			</tbody>
+		</table>
 
-                <!--<a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a>-->
-            </li>
-        </ul>
-
-        <h2>Add a new tip</h2>
+        <h2>Lis&auml;&auml; uusi vinkki</h2>
         <form method="POST">
-            Title: <input type="text" name="title"/> <br/>
-            Author: <input type="text" name="author"/> <br/>
-            Description: <input type="text" name="description"/> <br/>
-            Url: <input type="text" name="url"/>
-            <input type="submit" value="Add"/>
+            <table class="table-borderless">
+				<tr>
+					<td><label for="title">Otsikko</label></td>
+					<td><input type="text" id="title" name="title"/> </td>
+				</tr>
+				<tr>
+					<td><label for="author">Kirjoittaja</label></td>
+					<td><input type="text" id="author" name="author"/> </td>
+				</tr>
+				<tr>
+					<td><label for="description">Kuvaus</label></td>
+					<td><input type="text" name="description"/></td>
+				</tr>
+			    <tr>
+					<td><label for="description">Url</label></td>
+					<td><input type="text" id="url" name="url"/></td>
+				</tr>	
+				<tr>	
+					<td><input type ="submit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
+				</tr>
+			</table>
         </form>
     </body>
 </html>
