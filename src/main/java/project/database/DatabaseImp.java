@@ -32,7 +32,18 @@ public class DatabaseImp implements Database {
     }
 
     private void createTables() throws SQLException {
-        String createTable = "CREATE TABLE IF NOT EXISTS Tip(\n"
+
+        String createBookTable = "CREATE TABLE IF NOT EXISTS Book(\n"
+                + "     id integer PRIMARY KEY,\n"
+                + "     title varchar(144) NOT NULL,\n"
+                + "     author varchar(144) NOT NULL,\n"
+                + "     ISBN varchar(144) NOT NULL, \n"
+                + "     description varchar(1000) NOT NULL,\n"
+                + "     url varchar(1000) NOT NULL,\n"
+                + "     checked boolean\n"
+                + ");";
+
+        String createVideoTable = "CREATE TABLE IF NOT EXISTS Video(\n"
                 + "     id integer PRIMARY KEY,\n"
                 + "     title varchar(144) NOT NULL,\n"
                 + "     author varchar(144) NOT NULL,\n"
@@ -42,7 +53,8 @@ public class DatabaseImp implements Database {
                 + ");";
 
         Statement stmt = getConnection().createStatement();
-        stmt.execute(createTable);
+        stmt.executeUpdate(createBookTable);
+        stmt.executeUpdate(createVideoTable);
 
     }
 

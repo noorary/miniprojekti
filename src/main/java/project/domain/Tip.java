@@ -71,9 +71,10 @@ public class Tip {
     
     @Override
     public String toString() {
-        return "\nTitle: " + title + "\n Author: " + author +
-                "\n Description: " + description +
-                "\n Url: " + url +
-                "\n Checked: " + checked;
+        return "\nTitle: " + title + 
+                "\nAuthor: " + author +
+                "\nDescription: " + description +
+                "\nUrl: " + url +
+                "\nChecked: " + checked;
     }
 }
