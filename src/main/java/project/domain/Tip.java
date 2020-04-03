@@ -4,7 +4,7 @@ package project.domain;
  *
  * @author chenhuiz
  */
-public class Tip {
+public abstract class Tip {
     private int id;
     private String title;
     private String author;
