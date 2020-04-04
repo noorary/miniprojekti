@@ -8,6 +8,11 @@ apply plugin: "jacoco"
 
 mainClassName = 'project.main.Main'
 
+project.ext {
+    cucumberVersion = '4.7.4'
+    junitVersion = '4.12'
+}
+
 // In this section you declare where to find the dependencies of your project
 repositories {
     jcenter()
@@ -19,7 +24,15 @@ dependencies {
     compile group: 'com.sparkjava', name: 'spark-template-thymeleaf', version: '2.3'
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.8.11'
     compile 'org.slf4j:slf4j-api:1.7.25'
-    testCompile 'junit:junit:4.12'
+    testCompile 'io.cucumber:cucumber-java:' + cucumberVersion
+    testCompile 'io.cucumber:cucumber-junit:' + cucumberVersion
+    testCompile 'junit:junit:' + junitVersion
+    compile 'com.google.guava:guava:20.0'
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }
 
 run {
