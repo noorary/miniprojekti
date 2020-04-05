@@ -47,7 +47,7 @@ public class DatabaseImp implements Database {
 
         String createBookTable;
         String createVideoTable;
-        if(System.getenv("DATABASE_CORRECT") == null){
+        if(System.getenv("JDBC_DATABASE_URL") == null){
             createBookTable = "CREATE TABLE IF NOT EXISTS Book(\n"
                     + "     id integer PRIMARY KEY,\n"
                     + "     title varchar(144) NOT NULL,\n"
