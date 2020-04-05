@@ -7,6 +7,10 @@
 
 [CircleCI](https://circleci.com/gh/noorary/miniprojekti)
 
+
+## Linkki herokuun
+
+[heroku](https://ohtuminiprojekti.herokuapp.com/)
 ## Definition of done
 
 - User storyille on määritelty hyväksymiskriteerit
