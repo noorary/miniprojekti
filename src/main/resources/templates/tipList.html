@@ -9,10 +9,10 @@
         <nav class="navbar navbar-expand-sm bg-success navbar-dark">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Home</a>
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/list}">Add a tip</a>
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/list}">Lis&auml;&auml; lukuvinkki</a>
                 </li>
             </ul>
         </nav>
@@ -64,12 +64,13 @@
                     <td><input type="text" id="url" name="url"/></td>
                 </tr>	
                 <tr>	
-                    <td><input type ="submit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
+                    <td><input type ="submit" name="submit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
                 </tr>
             </table>
         </form>
 
         <h2>Lis&auml;&auml; uusi videon vinkki</h2>
+        <!--  
         <form method="POST" action="/newVideo">
             <table class="table-borderless">
                 <tr>
@@ -85,7 +86,7 @@
                     <td><input type="text" name="description"/></td>
                 </tr>
                 <tr>
-                    <td><label for="description">Url</label></td>
+                    <td><label for="url">Url</label></td>
                     <td><input type="text" id="url" name="url"/></td>
                 </tr>	
                 <tr>	
@@ -93,5 +94,6 @@
                 </tr>
             </table>
         </form>
+        -->
     </body>
 </html>

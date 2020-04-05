@@ -5,17 +5,29 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "jacoco" 
+apply plugin: 'build-dashboard'
 
 mainClassName = 'project.main.Main'
 
 project.ext {
     cucumberVersion = '4.7.4'
     junitVersion = '4.12'
+    seleniumVersion = '3.14.0'
+    fluentleniumVersion = '4.3.0'
 }
 
 // In this section you declare where to find the dependencies of your project
 repositories {
     jcenter()
+    mavenCentral()
+}
+
+task( browse, dependsOn: jar, type: JavaExec ) {
+    main = 'project.main.Tester'
+    classpath = sourceSets.main.runtimeClasspath
+    //add your own path here:
+    systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver', 'C:\\Users\\marhy\\Downloads\\chromedriver.exe')
+    //systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver', 'C:\\Users\\User name\\Downloads\\chromedriver.exe')
 }
 
 // In this section you declare the dependencies for your production and test code
@@ -28,6 +40,13 @@ dependencies {
     testCompile 'io.cucumber:cucumber-junit:' + cucumberVersion
     testCompile 'junit:junit:' + junitVersion
     compile 'com.google.guava:guava:20.0'
+    testCompile group: 'org.fluentlenium', name: 'fluentlenium-core', version: fluentleniumVersion
+    testCompile group: 'org.fluentlenium', name: 'fluentlenium-assertj', version: fluentleniumVersion  
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion   
+    compile group: 'org.seleniumhq.selenium', name: 'htmlunit-driver', version: '2.33.0'
 }
 
 test {
