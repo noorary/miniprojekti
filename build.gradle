@@ -26,7 +26,7 @@ task( browse, dependsOn: jar, type: JavaExec ) {
     main = 'project.main.Tester'
     classpath = sourceSets.main.runtimeClasspath
     //add your own path here:
-    systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver', 'C:\\Users\\marhy\\Downloads\\chromedriver.exe')
+    systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver', 'C:\\Users\\marhy\\Documents\\Kouluohjelmia\\chromedriver.exe')
     //systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver', 'C:\\Users\\User name\\Downloads\\chromedriver.exe')
 }
 
