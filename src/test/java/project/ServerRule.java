@@ -14,6 +14,7 @@ public class ServerRule extends ExternalResource {
         this.port = port;
     }
 
+
     @Override
     protected void before() throws Throwable {
         Spark.port(port);
