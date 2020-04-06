@@ -40,6 +40,13 @@ public class Main {
             
             return new ModelAndView(map, "tipList");
         }, new ThymeleafTemplateEngine());
+
+        Spark.get("/browseByHeader", (req, res) -> {
+            HashMap tips = new HashMap<>();
+            tips.put("tips", dbDao.listAllTypes());
+
+            return new ModelAndView(tips, "browsing");
+        }, new ThymeleafTemplateEngine());
         
         
         Spark.post("/newBook", (req, res) -> {
