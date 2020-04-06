@@ -30,6 +30,8 @@ public class DatabaseDao {
     public List<Tip> listByHeader() {
         List<Tip> list = new ArrayList<>();
 
+        list = listAllTypes();
+
         return list;
     }
 }
