@@ -6,6 +6,7 @@ import project.main.Main;
 
 import spark.Spark;
 
+
 public class ServerRule extends ExternalResource {
 
     private final int port;
@@ -26,3 +27,4 @@ public class ServerRule extends ExternalResource {
         Spark.stop();
     }
 }
+ 
