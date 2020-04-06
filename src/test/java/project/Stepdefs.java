@@ -1,8 +1,11 @@
 package project;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,14 +13,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+//import cucumber.api.java.After;
+//import cucumber.api.java.Before;
+
 public class Stepdefs {
-    WebDriver driver = new ChromeDriver();
-    String baseUrl = "http://localhost:4566";
-	
+
+    WebDriver driver = new HtmlUnitDriver();
+    String  baseUrl = "http://localhost:4566";;
+
+    
+    @Before
+    public void setup(){
+        this.driver = new HtmlUnitDriver();
+        this.baseUrl = "http://localhost:4566";
+    }
+
     @Given("book form is selected")
     public void bookFormIsSelected() {
         driver.get(baseUrl);
-        WebElement element = driver.findElement(By.linkText("Lis&auml;&auml; lukuvinkki"));       
+        WebElement element = driver.findElement(By.linkText("Lisää lukuvinkki"));       
         element.click();   
     }
     
@@ -42,6 +56,11 @@ public class Stepdefs {
     public void newTipIsAdded() {
     	//kesken
     	assertTrue(driver.getPageSource().contains(""));
+    }
+
+    @After
+    public void tearDown() {
+        driver.quit();
     }
 
 }

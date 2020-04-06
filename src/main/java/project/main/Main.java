@@ -15,10 +15,12 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 public class Main {
 
+    static Database db;
+
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello world");
 
-        Database db = new DatabaseImp("jdbc:sqlite:lukuvinkki.db");
+        db = new DatabaseImp("jdbc:sqlite:lukuvinkki.db");
         
         BookDao bookDao = new BookDao(db);
         VideoDao videoDao = new VideoDao(db);
