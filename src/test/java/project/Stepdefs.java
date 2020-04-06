@@ -55,8 +55,8 @@ public class Stepdefs {
     
     @Then("system will respond with success")
     public void newTipIsAdded() {
-    	//kesken
-    	assertTrue(driver.getPageSource().contains(""));
+        String content = "x";
+    	assertTrue(driver.getPageSource().contains(content));
     }
 
     @After
