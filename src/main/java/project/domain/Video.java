@@ -25,5 +25,10 @@ public class Video extends Tip {
                 "\nChecked: " + this.getChecked() + 
                 "\nType: " + type;
     }
+
+    public int CompareTo(Video otherVideo) {
+        int titleDiff = this.getTitle().compareToIgnoreCase(otherVideo.getTitle());
+        return titleDiff;
+    }
     
 }

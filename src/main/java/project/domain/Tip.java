@@ -4,7 +4,7 @@ package project.domain;
  *
  * @author chenhuiz
  */
-public abstract class Tip {
+public abstract class Tip implements Comparable<Tip>{
     private int id;
     private String title;
     private String author;
@@ -67,6 +67,12 @@ public abstract class Tip {
     
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    
+    public int compareTo(Tip otherTip) {
+        int titleDiff = this.title.compareToIgnoreCase(otherTip.title);
+        return titleDiff;
     }
     
     @Override

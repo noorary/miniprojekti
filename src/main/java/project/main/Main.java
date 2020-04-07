@@ -46,7 +46,7 @@ public class Main {
 
         Spark.get("/browseByHeader", (req, res) -> {
             HashMap tips = new HashMap<>();
-            tips.put("tips", dbDao.listAllTypes());
+            tips.put("tips", dbDao.listByTitle());
 
             return new ModelAndView(tips, "browsing");
         }, new ThymeleafTemplateEngine());

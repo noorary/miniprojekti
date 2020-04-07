@@ -2,7 +2,10 @@ package project.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
+import org.apache.xpath.SourceTree;
+
+import java.util.*;
 import project.domain.Tip;
 
 /**
@@ -27,11 +30,12 @@ public class DatabaseDao {
         return list;
     }
 
-    public List<Tip> listByHeader() {
-        List<Tip> list = new ArrayList<>();
+    public List<Tip> listByTitle() {
+        List<Tip> titleList = new ArrayList<>();
 
-        list = listAllTypes();
+        titleList = listAllTypes();
+        Collections.sort(titleList);
 
-        return list;
+        return titleList;
     }
 }

@@ -23,5 +23,30 @@
         <p>Sovellus, jonka avulla voit laittaa lukuvinkkisi j&auml;rjestykseen!</p>
         <p>Selaa lisäämisiä vinkkejä <a th:href="@{~/browseByHeader}">otsikon</a> tai linkin perusteella</p>
 
+        <h2>Kaikki lukuvinkit</h2>
+
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Otsikko</th>
+                        <th>Kirjoittaja</th>
+                        <th>Tyyppi</th>
+                        <th>Luettu</th>
+                        <th>Linkki</th>
+                        <th>Lisää tietoa</th> 
+                    </tr>
+                </thead>
+                <tr th:each="tip : ${tips}">
+                    <td th:text="${tip.title}">title</td>
+                    <td th:text="${tip.author}">author</td>
+                    <td th:text="${tip.type}">description</td>
+                    <td th:text="${tip.checked}">checked</td>
+                    <td th:text="${tip.url}">url</td>
+                    <td><a>Tiedot</a></td> <!--Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
+                    <!-- <td> <a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a> </td> -->
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>
