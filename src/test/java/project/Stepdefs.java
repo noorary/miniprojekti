@@ -85,6 +85,34 @@ public class Stepdefs {
         element.click();
     }
 
+    @When("book and video tips are added")
+    public void theTipAreAdded(){
+        driver.get(baseUrl + "/allTips");
+        WebElement element = driver.findElement(By.name("booktitle"));
+        element.sendKeys("listtestbook");
+        element = driver.findElement(By.name("bookauthor"));
+        element.sendKeys("listtestbook");
+        element = driver.findElement(By.name("ISBN"));
+        element.sendKeys("listtestbook");
+        element = driver.findElement(By.name("bookdescription"));
+        element.sendKeys("listtestbook");
+        element = driver.findElement(By.name("bookurl"));
+        element.sendKeys("listtestbook");
+        element = driver.findElement(By.name("booksubmit"));
+        element.click();
+
+        element = driver.findElement(By.name("videotitle"));
+        element.sendKeys("listtestvideo");
+        element = driver.findElement(By.name("videoauthor"));
+        element.sendKeys("listtestvideo");
+        element = driver.findElement(By.name("videodescription"));
+        element.sendKeys("listtestvideo");
+        element = driver.findElement(By.name("videourl"));
+        element.sendKeys("listtestvideo");
+        element = driver.findElement(By.name("videosubmit"));
+        element.click();
+
+    }
     @When("the videoform is filled without title")
     public void theVideoformIsFilledWithoutTitle() {
         driver.get(baseUrl + "/allTips");
@@ -110,6 +138,13 @@ public class Stepdefs {
     public void newTipIsAddedFailure() {
         String content = "titletest";
         assertFalse(driver.getPageSource().contains(content));
+    }
+
+    @Then("system will respond with correct list")
+    public void listWorksCorrectly() {
+        String content1 = "listtestvideo";
+        String content2 = "listtestbook";
+        assertTrue(driver.getPageSource().contains(content1) && driver.getPageSource().contains(content2));
     }
 
     @After
