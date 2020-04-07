@@ -29,30 +29,45 @@ public class Stepdefs {
         this.baseUrl = "http://localhost:4566";
     }
 
-    @Given("book form is selected")
+    @Given("form is selected")
     public void bookFormIsSelected() {
         driver.get(baseUrl);
         WebElement element = driver.findElement(By.linkText("Lisää lukuvinkki"));       
         element.click();   
     }
     
-    @When("the form is filled")
-    public void theFormIsFilled() {
+    @When("the bookform is filled")
+    public void theBookformIsFilled() {
         driver.get(baseUrl + "/allTips");
-        WebElement element = driver.findElement(By.name("title"));
+        WebElement element = driver.findElement(By.name("booktitle"));
         element.sendKeys("x");
-        element = driver.findElement(By.name("author"));
+        element = driver.findElement(By.name("bookauthor"));
         element.sendKeys("x");
         element = driver.findElement(By.name("ISBN"));
         element.sendKeys("x");
-        element = driver.findElement(By.name("description"));
+        element = driver.findElement(By.name("bookdescription"));
         element.sendKeys("x");
-        element = driver.findElement(By.name("url"));
+        element = driver.findElement(By.name("bookurl"));
         element.sendKeys("x");     
-        element = driver.findElement(By.name("submit"));
+        element = driver.findElement(By.name("booksubmit"));
         element.click();   
     }
-    
+
+    @When("the videoform is filled")
+    public void theVideoformIsFilled() {
+        driver.get(baseUrl + "/allTips");
+        WebElement element = driver.findElement(By.name("videotitle"));
+        element.sendKeys("x");
+        element = driver.findElement(By.name("videoauthor"));
+        element.sendKeys("x");
+        element = driver.findElement(By.name("videodescription"));
+        element.sendKeys("x");
+        element = driver.findElement(By.name("videourl"));
+        element.sendKeys("x");
+        element = driver.findElement(By.name("videosubmit"));
+        element.click();
+    }
+
     @Then("system will respond with success")
     public void newTipIsAdded() {
         String content = "x";

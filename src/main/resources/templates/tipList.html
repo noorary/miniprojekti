@@ -40,16 +40,16 @@
             </tbody>
         </table>
 
-        <h2>Lis&auml;&auml; uusi kirjan vinkki</h2>
+        <h2>Lis&auml;&auml; uusi kirja vinkki</h2>
         <form method="POST" action="/newBook">
             <table class="table-borderless">
                 <tr>
                     <td><label for="title">Otsikko</label></td>
-                    <td><input type="text" id="title" name="title"/> </td>
+                    <td><input type="text" id="booktitle" name="booktitle"/> </td>
                 </tr>
                 <tr>
                     <td><label for="author">Kirjoittaja</label></td>
-                    <td><input type="text" id="author" name="author"/> </td>
+                    <td><input type="text" id="bookauthor" name="bookauthor"/> </td>
                 </tr>
                 <tr>
                     <td><label for="ISBN">ISBN</label></td>
@@ -57,43 +57,42 @@
                 </tr>
                 <tr>
                     <td><label for="description">Kuvaus</label></td>
-                    <td><input type="text" name="description"/></td>
+                    <td><input type="text" name="bookdescription"/></td>
                 </tr>
                 <tr>
                     <td><label for="description">Url</label></td>
-                    <td><input type="text" id="url" name="url"/></td>
+                    <td><input type="text" id="bookurl" name="bookurl"/></td>
                 </tr>	
                 <tr>	
-                    <td><input type ="submit" name="submit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
+                    <td><input type ="submit" name="booksubmit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
                 </tr>
             </table>
         </form>
 
-        <h2>Lis&auml;&auml; uusi videon vinkki</h2>
-        <!--  
+        <h2>Lis&auml;&auml; uusi video vinkki</h2>
         <form method="POST" action="/newVideo">
             <table class="table-borderless">
                 <tr>
                     <td><label for="title">Otsikko</label></td>
-                    <td><input type="text" id="title" name="title"/> </td>
+                    <td><input type="text" id="videotitle" name="videotitle"/> </td>
                 </tr>
                 <tr>
                     <td><label for="author">Kirjoittaja</label></td>
-                    <td><input type="text" id="author" name="author"/> </td>
+                    <td><input type="text" id="videoauthor" name="videoauthor"/> </td>
                 </tr>
                 <tr>
                     <td><label for="description">Kuvaus</label></td>
-                    <td><input type="text" name="description"/></td>
+                    <td><input type="text" name="videodescription"/></td>
                 </tr>
                 <tr>
                     <td><label for="url">Url</label></td>
-                    <td><input type="text" id="url" name="url"/></td>
+                    <td><input type="text" id="videourl" name="videourl"/></td>
                 </tr>	
                 <tr>	
-                    <td><input type ="submit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
+                    <td><input type ="submit" name="videosubmit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
                 </tr>
             </table>
         </form>
-        -->
+
     </body>
 </html>

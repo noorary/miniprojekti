@@ -42,13 +42,13 @@ public class Main {
         
         
         Spark.post("/newBook", (req, res) -> {
-            bookDao.add(req.queryParams("title"), req.queryParams("author"), req.queryParams("ISBN"), req.queryParams("description"), req.queryParams("url"));
+            bookDao.add(req.queryParams("booktitle"), req.queryParams("bookauthor"), req.queryParams("ISBN"), req.queryParams("bookdescription"), req.queryParams("bookurl"));
             res.redirect("/allTips");
             return "New book added";
         });
         
         Spark.post("/newVideo", (req, res) -> {
-            videoDao.add(req.queryParams("title"), req.queryParams("author"), req.queryParams("description"), req.queryParams("url"));
+            videoDao.add(req.queryParams("videotitle"), req.queryParams("videoauthor"), req.queryParams("videodescription"), req.queryParams("videourl"));
             res.redirect("/allTips");
             return "New video added";
         });
