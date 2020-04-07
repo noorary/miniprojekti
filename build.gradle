@@ -60,14 +60,13 @@ run {
     standardInput = System.in
 }
 
-<<<<<<< HEAD
 applicationName = "miniprojekti"
 task stage(dependsOn: ['clean', 'installDist'])
-=======
+
 jacocoTestReport {
     reports {
         xml.enabled true
         html.enabled true
     }
 }
->>>>>>> cucumber
+
