@@ -53,6 +53,23 @@ public class Stepdefs {
         element.click();   
     }
 
+    @When("the bookform is filled without title")
+    public void theBookformIsFilledWithoutTitle() {
+        driver.get(baseUrl + "/allTips");
+        WebElement element = driver.findElement(By.name("booktitle"));
+        element.sendKeys("");
+        element = driver.findElement(By.name("bookauthor"));
+        element.sendKeys("titletest");
+        element = driver.findElement(By.name("ISBN"));
+        element.sendKeys("titletest");
+        element = driver.findElement(By.name("bookdescription"));
+        element.sendKeys("titletest");
+        element = driver.findElement(By.name("bookurl"));
+        element.sendKeys("titletest");
+        element = driver.findElement(By.name("booksubmit"));
+        element.click();
+    }
+
     @When("the videoform is filled")
     public void theVideoformIsFilled() {
         driver.get(baseUrl + "/allTips");
@@ -68,10 +85,31 @@ public class Stepdefs {
         element.click();
     }
 
+    @When("the videoform is filled without title")
+    public void theVideoformIsFilledWithoutTitle() {
+        driver.get(baseUrl + "/allTips");
+        WebElement element = driver.findElement(By.name("videotitle"));
+        element.sendKeys("");
+        element = driver.findElement(By.name("videoauthor"));
+        element.sendKeys("titletest");
+        element = driver.findElement(By.name("videodescription"));
+        element.sendKeys("titletest");
+        element = driver.findElement(By.name("videourl"));
+        element.sendKeys("titletest");
+        element = driver.findElement(By.name("videosubmit"));
+        element.click();
+    }
+
     @Then("system will respond with success")
     public void newTipIsAdded() {
         String content = "x";
     	assertTrue(driver.getPageSource().contains(content));
+    }
+
+    @Then("system will respond with failure")
+    public void newTipIsAddedFailure() {
+        String content = "titletest";
+        assertFalse(driver.getPageSource().contains(content));
     }
 
     @After
