@@ -23,12 +23,10 @@ public class Main {
 
         if (System.getenv("JDBC_DATABASE_URL") != null) {
             db = new DatabaseImp(System.getenv("JDBC_DATABASE_URL"));
-
             dao = new DatabaseDao(new TipDao(db));
+            
         } else if (dao == null) {
-
             db = new DatabaseImp("jdbc:sqlite:lukuvinkki.db");
-
             dao = new DatabaseDao(new TipDao(db));
         }
 
