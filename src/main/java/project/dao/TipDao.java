@@ -69,12 +69,6 @@ public class TipDao {
             stmt.setString(4, url);
             stmt.setBoolean(5, false);
 
-//            if (System.getenv("JDBC_DATABASE_URL") == null) {
-//                int value = 0;
-//                stmt.setInt(5, value);
-//            } else {
-//                stmt.setBoolean(5, false);
-//            }
             stmt.executeUpdate();
 
         } catch (SQLException ex) {

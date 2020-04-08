@@ -1,10 +1,5 @@
 Feature: User can add a reading tip
 
-    Scenario: test database is reset
-        Given go to front page
-        When in the right page
-        Then there is no string
-
     Scenario: user can add a reading tip
         Given page with reading tip form is selected
         When  the tip form is filled correctly

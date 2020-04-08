@@ -23,23 +23,6 @@ public class Stepdefs {
         this.baseUrl = "http://localhost:4566";
     }
     
-    @Given("go to front page")
-    public void frontPage() {
-        driver.get(baseUrl);
-        WebElement element = driver.findElement(By.linkText("Lisää lukuvinkki"));
-        element.click();
-    }
-    
-    @When("in the right page")
-    public void rightPage() {
-        assertTrue(driver.getPageSource().contains("Kaikki lukuvinkit"));
-    }
-    @Then("there is no string")
-    public void noContent() {
-        assertFalse(driver.getPageSource().contains("Harry Porter"));
-        assertFalse(driver.getPageSource().contains("Dear diary"));
-    }
-    
     @Given("page with reading tip form is selected")
     public void tipFormIsSelected() {
         driver.get(baseUrl);
