@@ -5,9 +5,9 @@ import spark.ModelAndView;
 import spark.Spark;
 
 import java.util.HashMap;
-import project.dao.BookDao;
+import project.dao.DaoManager;
 import project.dao.DatabaseDao;
-import project.dao.VideoDao;
+import project.dao.TipDao;
 import project.database.Database;
 import project.database.DatabaseImp;
 
@@ -15,47 +15,45 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 public class Main {
 
-    static Database db;
+    private static Database db;
+    private static DaoManager dao;
 
     public static void main(String[] args) throws SQLException {
-        Database db;
         System.out.println("Hello world");
-        if(System.getenv("JDBC_DATABASE_URL") != null){
+
+        if (System.getenv("JDBC_DATABASE_URL") != null) {
             db = new DatabaseImp(System.getenv("JDBC_DATABASE_URL"));
-        } else {
+
+            dao = new DatabaseDao(new TipDao(db));
+        } else if (dao == null) {
+
             db = new DatabaseImp("jdbc:sqlite:lukuvinkki.db");
+
+            dao = new DatabaseDao(new TipDao(db));
         }
 
-        BookDao bookDao = new BookDao(db);
-        VideoDao videoDao = new VideoDao(db);
-        DatabaseDao dbDao = new DatabaseDao(bookDao, videoDao);
-        
         Spark.get("/", (req, res) -> {
             HashMap data = new HashMap<>();
 
             return new ModelAndView(data, "index");
         }, new ThymeleafTemplateEngine());
 
-        
         Spark.get("/allTips", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("tips", dbDao.listAllTypes());
-            
+            map.put("tips", dao.listAll());
+
             return new ModelAndView(map, "tipList");
         }, new ThymeleafTemplateEngine());
-        
-        
-        Spark.post("/newBook", (req, res) -> {
-            bookDao.add(req.queryParams("booktitle"), req.queryParams("bookauthor"), req.queryParams("ISBN"), req.queryParams("bookdescription"), req.queryParams("bookurl"));
+
+        Spark.post("/newTip", (req, res) -> {
+            dao.addTip(req.queryParams("title"), req.queryParams("author"), req.queryParams("description"), req.queryParams("url"));
             res.redirect("/allTips");
-            return "New book added";
+            return "New tip added";
         });
-        
-        Spark.post("/newVideo", (req, res) -> {
-            videoDao.add(req.queryParams("videotitle"), req.queryParams("videoauthor"), req.queryParams("videodescription"), req.queryParams("videourl"));
-            res.redirect("/allTips");
-            return "New video added";
-        });
+    }
+
+    public static void setDao(DaoManager dao) {
+        Main.dao = dao;
     }
 
 }
