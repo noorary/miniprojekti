@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Stepdefs {
@@ -81,6 +83,19 @@ public class Stepdefs {
         element.click();
 
     }
+    
+    @When("the tip is deleted")
+    public void theTipIsDeleted() throws InterruptedException {
+    	/*WebElement element = driver.findElement(By.xpath("html/body/table/tbody[2]/tr[1]/td[6]/div/button"));
+    	element.click();
+    	
+    	driver.switchTo().activeElement();
+    	Thread.sleep(3000);
+    	WebElement modalContainer = driver.findElement(By.xpath("/html/body/table/tbody[2]/tr[1]/td[6]/div/div"));
+    	WebElement modalContent = modalContainer.findElement(By.xpath(".//*a[@class='btn btn-danger']"));
+        modalContent.click();*/
+        
+    }
 
     @Then("system will respond with success")
     public void newTipIsAdded() {
@@ -99,6 +114,14 @@ public class Stepdefs {
         String content1 = "Dear diary";
         String content2 = "Without you";
         assertTrue(driver.getPageSource().contains(content1) && driver.getPageSource().contains(content2));
+    }
+    
+    @Then("system will respond with delete success")
+    public void deleteIsSuccessful() {
+    	/*
+    	String content = "Tiptip";
+    	assertFalse(driver.getPageSource().contains(content));
+    	*/
     }
 
     @After
