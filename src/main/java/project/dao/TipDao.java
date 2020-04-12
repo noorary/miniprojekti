@@ -102,6 +102,5 @@ public class TipDao {
     	PreparedStatement stmt = conn.prepareStatement("DELETE FROM Tip WHERE id = ?");
     	stmt.setInt(1,  Integer.parseInt(id));
     	stmt.execute();
-    	conn.close();
     }
 }

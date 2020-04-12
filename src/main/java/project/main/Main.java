@@ -49,7 +49,7 @@ public class Main {
             return "New tip added";
         });
         
-        Spark.post("/allTips/delete/:id", (req, res) -> {
+        Spark.get("/allTips/delete/:id", (req, res) -> {
         	dao.deleteTip(req.params("id"));
         	res.redirect("/allTips");
         	return "Tip deleted";
