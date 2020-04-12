@@ -12,7 +12,7 @@
                     <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/list}">Lis&auml;&auml; lukuvinkki</a>
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/list}">Lisää lukuvinkki</a>
                 </li>
             </ul>
         </nav>
@@ -35,12 +35,12 @@
                     <td th:text="${tip.description}">kuvaus</td>
                     <td th:text="${tip.checked}">luettu</td>
                     <td><a>Tiedot</a></td> <!--Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
-                    <!-- <td> <a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a> </td> -->
+                    <td> <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}">poista</a> </td>
                 </tr>
             </tbody>
         </table>
 
-        <h2>Lis&auml;&auml; uusi lukuvinkki</h2>
+        <h2>Lisää uusi lukuvinkki</h2>
         <form method="POST" action="/newTip">
             <table class="table-borderless">
                 <tr>

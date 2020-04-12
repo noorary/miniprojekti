@@ -30,4 +30,15 @@ public class DatabaseDao implements DaoManager {
     public void addTip(String title, String author, String description, String url) {
         this.tipDao.add(title, author, description, url);
     }
+
+
+	@Override
+	public void deleteTip(String id) {
+		try {
+			this.tipDao.delete(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
 }
