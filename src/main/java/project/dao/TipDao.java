@@ -95,9 +95,9 @@ public class TipDao {
     
     public void delete(String id) throws Exception {
     	try {
-    		Integer.parseInt(id);
+            Integer.parseInt(id);
     	} catch (Throwable t) {
-    		return;
+            return;
     	}
     	PreparedStatement stmt = conn.prepareStatement("DELETE FROM Tip WHERE id = ?");
     	stmt.setInt(1,  Integer.parseInt(id));

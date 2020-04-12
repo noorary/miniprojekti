@@ -50,9 +50,9 @@ public class Main {
         });
         
         Spark.get("/allTips/delete/:id", (req, res) -> {
-        	dao.deleteTip(req.params("id"));
-        	res.redirect("/allTips");
-        	return "Tip deleted";
+            dao.deleteTip(req.params("id"));
+            res.redirect("/allTips");
+            return "Tip deleted";
         });
     }
 

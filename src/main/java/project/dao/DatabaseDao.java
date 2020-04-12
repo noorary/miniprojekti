@@ -32,13 +32,12 @@ public class DatabaseDao implements DaoManager {
     }
 
 
-	@Override
-	public void deleteTip(String id) {
-		try {
-			this.tipDao.delete(id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	}
+    @Override
+    public void deleteTip(String id) {
+        try {
+            this.tipDao.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }		
+    }
 }
