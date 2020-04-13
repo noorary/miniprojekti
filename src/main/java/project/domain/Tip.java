@@ -4,15 +4,15 @@ package project.domain;
  *
  * @author chenhuiz
  */
-public abstract class Tip implements Comparable<Tip>{
-    private int id;
+public class Tip {
+    private final long id;
     private String title;
     private String author;
     private String description;
     private String url;
     private boolean checked;
     
-    public Tip(int id, String title, String author, String description, String url, boolean checked) {
+    public Tip(long id, String title, String author, String description, String url, boolean checked) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -21,12 +21,8 @@ public abstract class Tip implements Comparable<Tip>{
         this.checked = checked;
     }
     
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getAuthor() {
