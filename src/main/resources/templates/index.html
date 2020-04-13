@@ -14,7 +14,7 @@
                     <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
 				</li>
                 <li class="nav-item">
-                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/allTips}">Lis&auml;&auml; lukuvinkki</a>
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/addNewTip}">Lis&auml;&auml; lukuvinkki</a>
                 </li>
             </ul>
         </nav>
@@ -22,6 +22,32 @@
         	<h1>Lukuvinkki</h1>
         </div>
         <p>Sovellus, jonka avulla voit laittaa lukuvinkkisi j&auml;rjestykseen!</p>
-        <p>Selaa lisäämisiä vinkkejä <a th:href="@{~/browseByHeader}">otsikon</a> tai linkin perusteella</p>
+
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Otsikko</th>
+                        <th>Tekijä</th>
+                        <th>Kuvaus</th>
+                        <th>Luettu</th>
+                        <!-- <th>Lisää tietoa</th> -->
+                    </tr>
+                </thead>
+                <tr th:each="tip : ${tips}">
+                    <td>
+                        <a th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
+                    </td>
+                    <td th:text="${tip.author}">author</td>
+                    <td th:text="${tip.description}">description</td>
+                    <td th:text="${tip.checked}">checked</td>
+                    <!-- <td><a>Tiedot</a></td> Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
+                    <!-- <td> <a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a> </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html> 
+
     </body>
 </html>
