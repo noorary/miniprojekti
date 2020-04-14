@@ -23,73 +23,44 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Otsikko</th>
-                        <th>Kirjoittaja</th>
-                        <th>Tyyppi</th>
+                        <th>Tekijä</th>
+                        <th>Kuvaus</th>
                         <th>Luettu</th>
                         <th>Lisää tietoa</th> 
                     </tr>
                 </thead>
                 <tr th:each="tip : ${tips}">
-                    <td th:text="${tip.title}">title</td>
-                    <td th:text="${tip.author}">author</td>
-                    <td th:text="${tip.type}">description</td>
-                    <td th:text="${tip.checked}">checked</td>
+                    <td th:text="${tip.title}">otsikko</td>
+                    <td th:text="${tip.author}">tekijä</td>
+                    <td th:text="${tip.description}">kuvaus</td>
+                    <td th:text="${tip.checked}">luettu</td>
                     <td><a>Tiedot</a></td> <!--Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
                     <!-- <td> <a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a> </td> -->
                 </tr>
             </tbody>
         </table>
 
-        <h2>Lis&auml;&auml; uusi kirja vinkki</h2>
-        <form method="POST" action="/newBook">
+        <h2>Lis&auml;&auml; uusi lukuvinkki</h2>
+        <form method="POST" action="/newTip">
             <table class="table-borderless">
                 <tr>
                     <td><label for="title">Otsikko</label></td>
-                    <td><input type="text" id="booktitle" name="booktitle"/> </td>
+                    <td><input type="text" id="title" name="title"/> </td>
                 </tr>
                 <tr>
-                    <td><label for="author">Kirjoittaja</label></td>
-                    <td><input type="text" id="bookauthor" name="bookauthor"/> </td>
-                </tr>
-                <tr>
-                    <td><label for="ISBN">ISBN</label></td>
-                    <td><input type="text" name="ISBN"/></td>
+                    <td><label for="author">Tekijä</label></td>
+                    <td><input type="text" id="author" name="author"/> </td>
                 </tr>
                 <tr>
                     <td><label for="description">Kuvaus</label></td>
-                    <td><input type="text" name="bookdescription"/></td>
-                </tr>
-                <tr>
-                    <td><label for="description">Url</label></td>
-                    <td><input type="text" id="bookurl" name="bookurl"/></td>
-                </tr>	
-                <tr>	
-                    <td><input type ="submit" name="booksubmit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
-                </tr>
-            </table>
-        </form>
-
-        <h2>Lis&auml;&auml; uusi video vinkki</h2>
-        <form method="POST" action="/newVideo">
-            <table class="table-borderless">
-                <tr>
-                    <td><label for="title">Otsikko</label></td>
-                    <td><input type="text" id="videotitle" name="videotitle"/> </td>
-                </tr>
-                <tr>
-                    <td><label for="author">Kirjoittaja</label></td>
-                    <td><input type="text" id="videoauthor" name="videoauthor"/> </td>
-                </tr>
-                <tr>
-                    <td><label for="description">Kuvaus</label></td>
-                    <td><input type="text" name="videodescription"/></td>
+                    <td><input type="text" id="description" name="description"/></td>
                 </tr>
                 <tr>
                     <td><label for="url">Url</label></td>
-                    <td><input type="text" id="videourl" name="videourl"/></td>
+                    <td><input type="text" id="url" name="url"/></td>
                 </tr>	
                 <tr>	
-                    <td><input type ="submit" name="videosubmit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
+                    <td><input type ="submit" name="submit" class="btn btn-success" value="Lis&auml;&auml;"/></td>
                 </tr>
             </table>
         </form>

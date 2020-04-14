@@ -7,28 +7,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import project.database.Database;
 import project.domain.Tip;
-import project.domain.Video;
 
 /**
  *
  * @author chenhuiz
  */
-public class VideoDao {
-    
+public class TipDao {
+
     private Connection conn;
 
-    public VideoDao(Database db) throws SQLException {
+    public TipDao(Database db) throws SQLException {
         this.conn = db.getConnection();
     }
 
     public List<Tip> listAll() {
+
         try {
             Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM Video");
+            ResultSet result = stmt.executeQuery("SELECT * FROM Tip");
 
-            List<Tip> videos = new ArrayList<>();
+            List<Tip> tips = new ArrayList<>();
 
             while (result.next()) {
                 int id = result.getInt("id");
@@ -38,16 +40,17 @@ public class VideoDao {
                 String url = result.getString("url");
                 boolean checked = result.getBoolean("checked");
 
-                Tip video = new Video(id, title, author, description, url, checked);
-                videos.add(video);
+                Tip tip = new Tip(id, title, author, description, url, checked);
+                tips.add(tip);
             }
 
-            return videos;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return tips;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+
     }
 
     public void add(String title, String author, String description, String url) {
@@ -57,37 +60,35 @@ public class VideoDao {
 
         try {
             PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO Video (title, author, description, url, checked) "
+                    "INSERT INTO Tip (title, author, description, url, checked) "
                     + "VALUES (?, ?, ?, ?, ?)");
+
             stmt.setString(1, title);
             stmt.setString(2, author);
             stmt.setString(3, description);
             stmt.setString(4, url);
-            if(System.getenv("JDBC_DATABASE_URL")== null){
-                int value = 0;
-                stmt.setInt(5, value);
-            }else{
-                stmt.setBoolean(5, false);
-            }
+            stmt.setBoolean(5, false);
+
             stmt.executeUpdate();
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
-    
+
     public boolean markAsRead(String title) {
-        
+
         try {
             PreparedStatement stmt = conn.prepareStatement(
-                    "UPDATE Video SET checked = ? WHERE title = ? ");
+                    "UPDATE Tip SET checked = ? WHERE title = ? ");
 
             stmt.setBoolean(1, true);
             stmt.setString(2, title);
             return true;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }

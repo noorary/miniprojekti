@@ -51,10 +51,10 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'htmlunit-driver', version: '2.33.0'
 }
 
-test {
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
-}
+//test {
+//    testLogging.showStandardStreams = true
+//    systemProperties System.getProperties()
+//}
 
 run {
     standardInput = System.in
