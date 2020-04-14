@@ -11,6 +11,11 @@
 ## Linkki herokuun
 
 [heroku](https://ohtuminiprojekti.herokuapp.com/)
+
+## Codecov
+
+[![codecov](https://codecov.io/gh/noorary/miniprojekti/branch/master/graph/badge.svg)](https://codecov.io/gh/noorary/miniprojekti)
+
 ## Definition of done
 
 - User storyille on määritelty hyväksymiskriteerit
