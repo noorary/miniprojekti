@@ -2,6 +2,7 @@ package project.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import project.domain.Tip;
 
 /**
@@ -28,6 +29,14 @@ public class DatabaseDao implements DaoManager {
 
     @Override
     public void addTip(String title, String author, String description, String url) {
+        
+        if(!(url.length() == 0)) {
+            String sub = url.substring(0,4);
+            if(!sub.equals("http")) {
+                url = "https://" + url;
+            }
+        }
+        
         this.tipDao.add(title, author, description, url);
     }
 }

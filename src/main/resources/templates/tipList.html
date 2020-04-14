@@ -12,11 +12,11 @@
                     <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/list}">Lis&auml;&auml; lukuvinkki</a>
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/addNewTip}">Lis&auml;&auml; lukuvinkki</a>
                 </li>
             </ul>
         </nav>
-        <h2>Kaikki lukuvinkit</h2>
+        <!-- <h2>Kaikki lukuvinkit</h2>
 
         <table class="table table-bordered" style="margin-top: 20px;">
             <tbody>
@@ -34,11 +34,12 @@
                     <td th:text="${tip.author}">tekijä</td>
                     <td th:text="${tip.description}">kuvaus</td>
                     <td th:text="${tip.checked}">luettu</td>
-                    <td><a>Tiedot</a></td> <!--Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
+                    <td><a>Tiedot</a></td> 
+                    <!-- Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
                     <!-- <td> <a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a> </td> -->
-                </tr>
+        <!--        </tr>
             </tbody>
-        </table>
+        </table> -->
 
         <h2>Lis&auml;&auml; uusi lukuvinkki</h2>
         <form method="POST" action="/newTip">

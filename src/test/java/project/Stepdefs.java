@@ -1,5 +1,6 @@
 package project;
 
+import io.appium.java_client.functions.ExpectedCondition;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Stepdefs {
@@ -21,6 +23,7 @@ public class Stepdefs {
     public void setup() {
         this.driver = new HtmlUnitDriver();
         this.baseUrl = "http://localhost:4566";
+
     }
     
     @Given("page with reading tip form is selected")
@@ -28,6 +31,11 @@ public class Stepdefs {
         driver.get(baseUrl);
         WebElement element = driver.findElement(By.linkText("Lisää lukuvinkki"));
         element.click();
+    }
+
+    @Given("frontpage is opened")
+    public void frontpageIsOpened() {
+        driver.get(baseUrl);
     }
 
     @When("the tip form is filled correctly")
@@ -69,6 +77,9 @@ public class Stepdefs {
         element = driver.findElement(By.name("submit"));
         element.click();
 
+        element = driver.findElement(By.linkText("Lisää lukuvinkki"));
+        element.click();
+
         element = driver.findElement(By.name("title"));
         element.sendKeys("Without you");
         element = driver.findElement(By.name("author"));
@@ -81,6 +92,7 @@ public class Stepdefs {
         element.click();
 
     }
+
 
     @Then("system will respond with success")
     public void newTipIsAdded() {

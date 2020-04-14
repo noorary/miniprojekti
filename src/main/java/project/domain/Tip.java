@@ -64,6 +64,12 @@ public class Tip {
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
+
+    
+    public int compareTo(Tip otherTip) {
+        int titleDiff = this.title.compareToIgnoreCase(otherTip.title);
+        return titleDiff;
+    }
     
     @Override
     public String toString() {
