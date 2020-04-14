@@ -6,6 +6,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -86,18 +89,21 @@ public class Stepdefs {
     
     @When("the tip is deleted")
     public void theTipIsDeleted() throws InterruptedException {
-    	WebElement element = driver.findElement(By.xpath("/html/body/table/tbody[2]/tr[1]/td[6]/div/button"));
+    	List<WebElement> buttons = driver.findElements(By.id("poistoButton"));
+    	//WebElement element = driver.findElement(By.id("poistoButton"));
+    	WebElement element = buttons.get(0);
     	element.click();
     	
     	driver.switchTo().activeElement();
     	Thread.sleep(3000);
-    	WebElement modalContainer = driver.findElement(By.xpath("/html/body/table/tbody[2]/tr[1]/td[6]/div/div"));
-    	WebElement body = modalContainer.findElement(By.className("modal-body"));
-    	WebElement p = body.findElement(By.xpath(".//p"));
-    	System.out.println(p.getText());
-    	//WebElement a = body.findElement(By.xpath(".//a"));
+    	List<WebElement> modals = driver.findElements(By.id("poistoModal"));
+    	//WebElement modal = driver.findElement(By.id("poistoModal"));
+    	WebElement modal = modals.get(0);
+    	modal.click();
+    	WebElement body = modal.findElement(By.className("modal-body"));
     	WebElement a = body.findElement(By.linkText("Poista lukuvinkki"));
     	Thread.sleep(3000);
+    	
         a.click();
         Thread.sleep(3000);
         
@@ -125,7 +131,7 @@ public class Stepdefs {
     @Then("system will respond with delete success")
     public void deleteIsSuccessful() {
     	
-    	String content = "Testi";
+    	String content = "Kukkakaali";
     	assertFalse(driver.getPageSource().contains(content));
     	
     }
