@@ -40,6 +40,13 @@ public class TipDao {
                 String url = result.getString("url");
                 boolean checked = result.getBoolean("checked");
 
+                if(!(url.length() == 0)) {
+                    String sub = url.substring(0,4);
+                    if(!sub.equals("http")) {
+                        url = "https://" + url;
+                    }
+                }
+                
                 Tip tip = new Tip(id, title, author, description, url, checked);
                 tips.add(tip);
             }
