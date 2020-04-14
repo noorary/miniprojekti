@@ -54,7 +54,7 @@ public class TipDao {
     }
 
     public void add(String title, String author, String description, String url) {
-        if (title.isEmpty() || author.isEmpty() || description.isEmpty() || url.isEmpty()) {
+        if (title.isEmpty() || author.isEmpty() || description.isEmpty()) {
             return;
         }
 
