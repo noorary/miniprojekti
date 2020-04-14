@@ -25,7 +25,7 @@ public class ServerRule extends ExternalResource {
         
         db = new DatabaseImp("jdbc:sqlite:test.db");
         DaoManager dao = new DatabaseDao(new TipDao(db));
-        
+        dao.addTip("Testi", "tekijä", "onpahan jotain", "www.linkki.com");
         Main.setDao(dao);
         Main.main(null);
     }

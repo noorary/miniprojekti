@@ -86,14 +86,20 @@ public class Stepdefs {
     
     @When("the tip is deleted")
     public void theTipIsDeleted() throws InterruptedException {
-    	/*WebElement element = driver.findElement(By.xpath("html/body/table/tbody[2]/tr[1]/td[6]/div/button"));
+    	WebElement element = driver.findElement(By.xpath("/html/body/table/tbody[2]/tr[1]/td[6]/div/button"));
     	element.click();
     	
     	driver.switchTo().activeElement();
     	Thread.sleep(3000);
     	WebElement modalContainer = driver.findElement(By.xpath("/html/body/table/tbody[2]/tr[1]/td[6]/div/div"));
-    	WebElement modalContent = modalContainer.findElement(By.xpath(".//*a[@class='btn btn-danger']"));
-        modalContent.click();*/
+    	WebElement body = modalContainer.findElement(By.className("modal-body"));
+    	WebElement p = body.findElement(By.xpath(".//p"));
+    	System.out.println(p.getText());
+    	//WebElement a = body.findElement(By.xpath(".//a"));
+    	WebElement a = body.findElement(By.linkText("Poista lukuvinkki"));
+    	Thread.sleep(3000);
+        a.click();
+        Thread.sleep(3000);
         
     }
 
@@ -118,10 +124,10 @@ public class Stepdefs {
     
     @Then("system will respond with delete success")
     public void deleteIsSuccessful() {
-    	/*
-    	String content = "Tiptip";
+    	
+    	String content = "Testi";
     	assertFalse(driver.getPageSource().contains(content));
-    	*/
+    	
     }
 
     @After
