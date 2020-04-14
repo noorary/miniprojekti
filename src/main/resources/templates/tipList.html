@@ -15,60 +15,10 @@
                     <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/allTips}">Lisää lukuvinkki</a>
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/addNewTip}">Lisää lukuvinkki</a>
                 </li>
             </ul>
         </nav>
-        <h2>Kaikki lukuvinkit</h2>
-        
-        <table class="table table-bordered" style="margin-top: 20px;">
-            <tbody>
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Otsikko</th>
-                        <th>Tekijä</th>
-                        <th>Kuvaus</th>
-                        <th>Luettu</th>
-                        <th>Lisää tietoa</th> 
-                        <th></th>
-                    </tr>
-                </thead>
-                <tr th:each="tip : ${tips}">
-                    <td th:text="${tip.title}">otsikko</td>
-                    <td th:text="${tip.author}">tekijä</td>
-                    <td th:text="${tip.description}">kuvaus</td>
-                    <td th:text="${tip.checked}">luettu</td>
-                    <td><a>Tiedot</a></td> <!--Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
-                    <td>
-				        <div class="container">
-				            <button type="button" id="poistoButton" class="btn btn-primary" data-toggle="modal" data-target="#poistoModal">
-				                Poista
-				            </button>
-				            <div class="modal" id="poistoModal">
-				                <div class="modal-dialog">
-				                    <div class="modal-content">
-				                        <div class="modal-header">
-				                            <h4 class="modal-title">Vahvista poisto</h4>
-				                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-				                        </div>
-				                        <div class="modal-body">
-				                            <p>Haluatko varmasti poistaa lukuvinkin?</p>
-				                            <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
-				                                Poista lukuvinkki
-				                            </a> 
-				                        </div>
-				                        <div class="modal-footer">
-				                            <button type="button" class="btn btn-danger" data-dismiss="modal">Sulje</button>
-				                        </div>			        
-				                    </div>
-				                </div>
-				            </div>
-				        </div>                   
-                    </td>
-                    <!-- <td> <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}">poista</a> </td> -->
-                </tr>
-            </tbody>
-        </table>
 
         <h2>Lisää uusi lukuvinkki</h2>
         <form method="POST" action="/newTip">

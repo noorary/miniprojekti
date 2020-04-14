@@ -57,7 +57,7 @@ public class DatabaseImp implements Database {
                     + "     title varchar(144) NOT NULL,\n"
                     + "     author varchar(144) NOT NULL,\n"
                     + "     description varchar(1000) NOT NULL,\n"
-                    + "     url varchar(1000) NOT NULL,\n"
+                    + "     url varchar(1000),\n"
                     + "     checked boolean\n"
                     + ");";
         } else {
@@ -67,7 +67,7 @@ public class DatabaseImp implements Database {
                     + "     title varchar(144) NOT NULL,\n"
                     + "     author varchar(144) NOT NULL,\n"
                     + "     description varchar(1000) NOT NULL,\n"
-                    + "     url varchar(1000) NOT NULL,\n"
+                    + "     url varchar(1000),\n"
                     + "     checked boolean\n"
                     + ");";
         }

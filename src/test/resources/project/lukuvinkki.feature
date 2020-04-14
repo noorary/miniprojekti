@@ -14,3 +14,4 @@ Feature: User can add a reading tip
         Given page with reading tip form is selected
         When  all tips are added
         Then  system will respond with correct list
+
