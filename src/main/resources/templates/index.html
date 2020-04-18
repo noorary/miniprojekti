@@ -46,8 +46,12 @@
                     <td th:text="${tip.description}">description</td>
                     <td th:text="${tip.checked}">checked</td>
                     <!-- <td><a>Tiedot</a></td> Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
-                    <!-- <td> <a th:href="@{~/tehtavat/poista/{id}(id=${tehtava.id})}">poista</a> </td> -->
-                    <td>
+                    <td th:id="'poisto' + ${tip.id}">
+                        <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
+				            Poista lukuvinkki
+				        </a>
+				    </td>
+                    <!--  <td>
 				        <div class="container">
 				            <button type="button" th:id="'button' + ${tip.id}" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#poistoModal'+${tip.id}" >
 				                Poista
@@ -73,6 +77,7 @@
 				            </div>
 				        </div>                   
                     </td>
+                    -->
                 </tr>
             </tbody>
         </table>
