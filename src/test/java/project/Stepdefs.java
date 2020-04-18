@@ -100,11 +100,7 @@ public class Stepdefs {
     @When("the tip is deleted")
     public void theTipIsDeleted() throws InterruptedException {
     	WebElement element = driver.findElement(By.id("poisto1"));
-
-    	Thread.sleep(3000);
-
-    	WebElement a = element.findElement(By.linkText("Poista lukuvinkki"));
-    	Thread.sleep(3000);   	
+    	WebElement a = element.findElement(By.linkText("Poista lukuvinkki"));  	
         a.click();
         
     }
