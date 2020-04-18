@@ -48,6 +48,12 @@ public class Main {
             res.redirect("/");
             return "New tip added";
         });
+        
+        Spark.get("/allTips/delete/:id", (req, res) -> {
+            dao.deleteTip(req.params("id"));
+            res.redirect("/");
+            return "Tip deleted";
+        });
     }
 
     public static void setDao(DaoManager dao) {

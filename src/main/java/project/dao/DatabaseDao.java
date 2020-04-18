@@ -39,4 +39,14 @@ public class DatabaseDao implements DaoManager {
         
         this.tipDao.add(title, author, description, url);
     }
+
+
+    @Override
+    public void deleteTip(String id) {
+        try {
+            this.tipDao.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }		
+    }
 }

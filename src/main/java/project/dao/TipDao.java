@@ -92,4 +92,15 @@ public class TipDao {
             return false;
         }
     }
+    
+    public void delete(String id) throws Exception {
+    	try {
+            Integer.parseInt(id);
+    	} catch (Throwable t) {
+            return;
+    	}
+    	PreparedStatement stmt = conn.prepareStatement("DELETE FROM Tip WHERE id = ?");
+    	stmt.setInt(1,  Integer.parseInt(id));
+    	stmt.execute();
+    }
 }

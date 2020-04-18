@@ -12,4 +12,6 @@ public interface DaoManager {
     List<Tip> listAll();
 
     void addTip(String title, String author, String description, String url);
+    
+    void deleteTip(String id);
 }

@@ -7,10 +7,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -92,6 +96,14 @@ public class Stepdefs {
         element.click();
 
     }
+    
+    @When("the tip is deleted")
+    public void theTipIsDeleted() throws InterruptedException {
+    	WebElement element = driver.findElement(By.id("poisto1"));
+    	WebElement a = element.findElement(By.linkText("Poista lukuvinkki"));  	
+        a.click();
+        
+    }
 
 
     @Then("system will respond with success")
@@ -111,6 +123,14 @@ public class Stepdefs {
         String content1 = "Dear diary";
         String content2 = "Without you";
         assertTrue(driver.getPageSource().contains(content1) && driver.getPageSource().contains(content2));
+    }
+    
+    @Then("system will respond with delete success")
+    public void deleteIsSuccessful() {
+    	
+    	String content = "Kukkakaali";
+    	assertFalse(driver.getPageSource().contains(content));
+    	
     }
 
     @After
