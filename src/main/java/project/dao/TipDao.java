@@ -15,7 +15,7 @@ import project.domain.Tip;
  * @author chenhuiz
  */
 public class TipDao {
-
+    private Boolean read;
     private Connection conn;
 
     public TipDao(Database db) throws SQLException {
@@ -37,8 +37,9 @@ public class TipDao {
                 String description = result.getString("description");
                 String url = result.getString("url");
                 boolean checked = result.getBoolean("checked");
+                Timestamp checkedtime = result.getTimestamp("checkedtime");
 
-                Tip tip = new Tip(id, title, author, description, url, checked);
+                Tip tip = new Tip(id, title, author, description, url, checked, checkedtime);
                 tips.add(tip);
             }
 
@@ -80,20 +81,48 @@ public class TipDao {
         } catch (Throwable t) {
             return;
         }
-
-        try {
+        try{
             PreparedStatement stmt = conn.prepareStatement(
-                    "UPDATE Tip SET checked = ?, checkedtime = ? WHERE id = ? ");
-
-            LocalDateTime now = LocalDateTime.now();
-            Timestamp timestamp = Timestamp.valueOf(now);
-            stmt.setBoolean(1, true);
-            stmt.setTimestamp(2, timestamp);
-            stmt.setInt(3, Integer.parseInt(id));
-            stmt.execute();
-
-        } catch (SQLException ex) {
+                    "SELECT * FROM Tip WHERE id = ?");
+            stmt.setInt(1, Integer.parseInt(id));
+            ResultSet res = stmt.executeQuery();
+            read = res.getBoolean("checked");
+            String title = res.getString("title");
+            System.out.println(title);
+        }catch(SQLException ex){
             Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        if (read == false) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement(
+                        "UPDATE Tip SET checked = ?, checkedtime = ? WHERE id = ? ");
+
+                LocalDateTime now = LocalDateTime.now();
+                Timestamp timestamp = Timestamp.valueOf(now);
+                stmt.setBoolean(1, true);
+                stmt.setTimestamp(2, timestamp);
+                stmt.setInt(3, Integer.parseInt(id));
+                stmt.execute();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                PreparedStatement stmt = conn.prepareStatement(
+                        "UPDATE Tip SET checked = ?, checkedtime = ? WHERE id = ? ");
+
+                stmt.setBoolean(1, false);
+                stmt.setTimestamp(2, null);
+                stmt.setInt(3, Integer.parseInt(id));
+                stmt.execute();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
     
