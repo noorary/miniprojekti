@@ -51,6 +51,11 @@
 				            Poista lukuvinkki
 				        </a>
 				    </td>
+                    <td th:id="'Luettu' + ${tip.id}">
+                        <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
+                            Merkitse lukuvinkki luetuksi
+                        </a>
+                    </td>
                     <!--  <td>
 				        <div class="container">
 				            <button type="button" th:id="'button' + ${tip.id}" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#poistoModal'+${tip.id}" >

@@ -49,4 +49,13 @@ public class DatabaseDao implements DaoManager {
             e.printStackTrace();
         }		
     }
+
+    @Override
+    public void markTipRead(String id){
+        try {
+            this.tipDao.markAsRead(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
