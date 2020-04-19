@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
