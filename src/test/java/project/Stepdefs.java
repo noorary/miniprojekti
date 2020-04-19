@@ -99,14 +99,14 @@ public class Stepdefs {
     }
     
     @When("the tip is deleted")
-    public void theTipIsDeleted() throws InterruptedException {
+    public void theTipIsDeleted() throws InterruptedException{
     	WebElement element = driver.findElement(By.id("poisto1"));
     	WebElement a = element.findElement(By.linkText("Poista lukuvinkki"));  	
         a.click();
         
     }
 
-   @When("the tip is marked as read")
+    @When("the tip is marked as read")
     public void theTipIsMarkedAsRead() throws  InterruptedException{
         WebElement element = driver.findElement(By.id("luettu1"));
         WebElement luettubutton = element.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
