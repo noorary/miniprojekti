@@ -12,7 +12,7 @@ public class TipTest {
     private Tip tip;
 
     public TipTest() {
-        tip = new Tip(3, "didn't i", "One Republic", "New single song", "www.youtube.com", false);
+        tip = new Tip(3, "didn't i", "One Republic", "New single song", "www.youtube.com", false, null);
     }
 
     @Test

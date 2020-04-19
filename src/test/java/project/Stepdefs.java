@@ -105,7 +105,33 @@ public class Stepdefs {
         
     }
 
+   @When("the tip is marked as read")
+    public void theTipIsMarkedAsRead() throws  InterruptedException{
+        WebElement element = driver.findElement(By.id("luettu1"));
+        WebElement luettubutton = element.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        luettubutton.click();
+    }
 
+    @When("the tip is marked as read and toggled again")
+    public void theTipIsMarkedAsReadTwice() throws  InterruptedException{
+        WebElement element1 = driver.findElement(By.id("luettu1"));
+        WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        luettubutton1.click();
+        WebElement element2 = driver.findElement(By.id("luettu1"));
+        WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        luettubutton2.click();
+    }
+
+    @Then("system will respond with marked as read true")
+    public void tipIsMarkedReadTrue(){
+        String luettu = "true";
+        assertTrue(driver.getPageSource().contains(luettu));
+    }
+    @Then("system will respond with marked as read false")
+    public void tipIsMarkedReadFalse(){
+        String luettu = "false";
+        assertFalse(driver.getPageSource().contains(luettu));
+    }
     @Then("system will respond with success")
     public void newTipIsAdded() {
         String content = "Harry Porter";

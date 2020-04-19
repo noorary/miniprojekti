@@ -35,6 +35,8 @@
                         <th>Tekijä</th>
                         <th>Kuvaus</th>
                         <th>Luettu</th>
+                        <th>Milloin</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -45,17 +47,18 @@
                     <td th:text="${tip.author}">author</td>
                     <td th:text="${tip.description}">description</td>
                     <td th:text="${tip.checked}">checked</td>
+                    <td th:text="${tip.checkedtime}">checkedtime</td>
                     <!-- <td><a>Tiedot</a></td> Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
+                    <td th:id="'luettu' + ${tip.id}">
+                        <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
+                            Merkitse lukuvinkki luetuksi
+                        </a>
+                    </td>
                     <td th:id="'poisto' + ${tip.id}">
                         <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
 				            Poista lukuvinkki
 				        </a>
 				    </td>
-                    <td th:id="'Luettu' + ${tip.id}">
-                        <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
-                            Merkitse lukuvinkki luetuksi
-                        </a>
-                    </td>
                     <!--  <td>
 				        <div class="container">
 				            <button type="button" th:id="'button' + ${tip.id}" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#poistoModal'+${tip.id}" >
