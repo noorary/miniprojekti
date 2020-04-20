@@ -16,7 +16,6 @@ public class Tip {
     private String url;
     private boolean checked;
 
-//    private List<TipTag> tags;
     private List<Tag> tags;
 
     public Tip(int id, String title, String author, String description, String url, boolean checked) {
@@ -28,18 +27,6 @@ public class Tip {
         this.checked = checked;
         this.tags = new ArrayList<>();
     }
-
-    public List<Tag> getTags() {
-        return this.tags;
-    }
-    
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
-//    
-//    public void addTag(Tag tag) {
-//        this.tags.add(tag);
-//    }
 
     public int getId() {
         return id;
@@ -83,6 +70,14 @@ public class Tip {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public List<Tag> getTags() {
+        return this.tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public int compareTo(Tip otherTip) {
