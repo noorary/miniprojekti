@@ -109,17 +109,17 @@ public class Stepdefs {
     @When("the tip is marked as read")
     public void theTipIsMarkedAsRead() throws  InterruptedException{
         WebElement element = driver.findElement(By.id("luettu1"));
-        WebElement luettubutton = element.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        WebElement luettubutton = element.findElement(By.linkText("Merkitse lukuvinkki luetuksi/lukemattomaksi"));
         luettubutton.click();
     }
 
     @When("the tip is marked as read and toggled again")
     public void theTipIsMarkedAsReadTwice() throws  InterruptedException{
         WebElement element1 = driver.findElement(By.id("luettu1"));
-        WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse lukuvinkki luetuksi/lukemattomaksi"));
         luettubutton1.click();
         WebElement element2 = driver.findElement(By.id("luettu1"));
-        WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse lukuvinkki luetuksi/lukemattomaksi"));
         luettubutton2.click();
     }
 
