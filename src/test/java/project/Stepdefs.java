@@ -6,13 +6,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
-<<<<<<< HEAD
-
-import java.io.File;
-import java.util.List;
-
-=======
->>>>>>> master
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
