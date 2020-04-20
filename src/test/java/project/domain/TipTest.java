@@ -3,6 +3,8 @@ package project.domain;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author chenhuiz
@@ -48,6 +50,13 @@ public class TipTest {
     public void setCheckedTest() {
         tip.setChecked(!this.tip.getChecked());
         assertEquals(true, tip.getChecked());
+    }
+
+    @Test
+    public void setCheckedTimeTest(){
+        Timestamp aika = Timestamp.valueOf("2020-04-20 11:36:11.345");
+        tip.setCheckedtime(aika);
+        assertEquals(aika, tip.getCheckedtime());
     }
 
     @Test
