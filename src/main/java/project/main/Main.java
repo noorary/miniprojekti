@@ -32,21 +32,32 @@ public class Main {
 
         Spark.get("/", (req, res) -> {
             HashMap data = new HashMap<>();
+            data.put("tips", dao.listAll());
 
             return new ModelAndView(data, "index");
         }, new ThymeleafTemplateEngine());
 
-        Spark.get("/allTips", (req, res) -> {
+        Spark.get("/addNewTip", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("tips", dao.listAll());
 
             return new ModelAndView(map, "tipList");
         }, new ThymeleafTemplateEngine());
 
         Spark.post("/newTip", (req, res) -> {
             dao.addTip(req.queryParams("title"), req.queryParams("author"), req.queryParams("description"), req.queryParams("url"));
-            res.redirect("/allTips");
+            res.redirect("/");
             return "New tip added";
+        });
+        
+        Spark.get("/allTips/delete/:id", (req, res) -> {
+            dao.deleteTip(req.params("id"));
+            res.redirect("/");
+            return "Tip deleted";
+        });
+        Spark.get("/allTips/markasread/:id", (req, res) -> {
+            dao.markTipRead(req.params("id"));
+            res.redirect("/");
+            return "Tip deleted";
         });
     }
 

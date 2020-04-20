@@ -57,8 +57,9 @@ public class DatabaseImp implements Database {
                     + "     title varchar(144) NOT NULL,\n"
                     + "     author varchar(144) NOT NULL,\n"
                     + "     description varchar(1000) NOT NULL,\n"
-                    + "     url varchar(1000) NOT NULL,\n"
-                    + "     checked boolean\n"
+                    + "     url varchar(1000),\n"
+                    + "     checked boolean,\n"
+                    +"      checkedtime timestamp\n"
                     + ");";
         } else {
 
@@ -67,8 +68,9 @@ public class DatabaseImp implements Database {
                     + "     title varchar(144) NOT NULL,\n"
                     + "     author varchar(144) NOT NULL,\n"
                     + "     description varchar(1000) NOT NULL,\n"
-                    + "     url varchar(1000) NOT NULL,\n"
+                    + "     url varchar(1000),\n"
                     + "     checked boolean\n"
+                    +"      checkedtime timestamp\n"
                     + ");";
         }
         Statement stmt = getConnection().createStatement();

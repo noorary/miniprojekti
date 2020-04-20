@@ -1,27 +1,66 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
     <head>
         <title>Mahtavin Lukuvinkki-sovellus</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
 
     <body>
-        
+
         <nav class="navbar navbar-expand-sm bg-success navbar-dark">
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
-				</li>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/allTips}">Lis&auml;&auml; lukuvinkki</a>
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/addNewTip}">Lisää lukuvinkki</a>
                 </li>
             </ul>
         </nav>
         <div style="padding: 10px 0px;">
-        	<h1>Lukuvinkki</h1>
+            <h1>Lukuvinkki</h1>
         </div>
-        <p>Sovellus, jonka avulla voit laittaa lukuvinkkisi j&auml;rjestykseen!</p>
+        <p>Sovellus, jonka avulla voit laittaa lukuvinkkisi järjestykseen!</p>
 
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Otsikko</th>
+                        <th>Tekijä</th>
+                        <th>Kuvaus</th>
+                        <th>Luettu</th>
+                        <th>Milloin</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tr th:each="tip : ${tips}">
+                    <td>
+                        <a th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
+                    </td>
+                    <td th:text="${tip.author}">author</td>
+                    <td th:text="${tip.description}">description</td>
+                    <td th:text="${tip.checked}">checked</td>
+                    <td th:text="${tip.checkedtime}">checkedtime</td>
+                    <td th:id="'luettu' + ${tip.id}">
+                        <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
+                            Merkitse lukuvinkki luetuksi/lukemattomaksi
+                        </a>
+                    </td>
+                    <td th:id="'poisto' + ${tip.id}">
+                        <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
+                            Poista lukuvinkki
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
     </body>
-</html>
+</html> 
