@@ -6,6 +6,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
+<<<<<<< HEAD
+
+import java.io.File;
+import java.util.List;
+
+=======
+>>>>>>> master
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -92,14 +99,40 @@ public class Stepdefs {
     }
     
     @When("the tip is deleted")
-    public void theTipIsDeleted() throws InterruptedException {
+    public void theTipIsDeleted() throws InterruptedException{
     	WebElement element = driver.findElement(By.id("poisto1"));
     	WebElement a = element.findElement(By.linkText("Poista lukuvinkki"));  	
         a.click();
         
     }
 
+    @When("the tip is marked as read")
+    public void theTipIsMarkedAsRead() throws  InterruptedException{
+        WebElement element = driver.findElement(By.id("luettu1"));
+        WebElement luettubutton = element.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        luettubutton.click();
+    }
 
+    @When("the tip is marked as read and toggled again")
+    public void theTipIsMarkedAsReadTwice() throws  InterruptedException{
+        WebElement element1 = driver.findElement(By.id("luettu1"));
+        WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        luettubutton1.click();
+        WebElement element2 = driver.findElement(By.id("luettu1"));
+        WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse lukuvinkki luetuksi"));
+        luettubutton2.click();
+    }
+
+    @Then("system will respond with marked as read true")
+    public void tipIsMarkedReadTrue(){
+        String luettu = "true";
+        assertTrue(driver.getPageSource().contains(luettu));
+    }
+    @Then("system will respond with marked as read false")
+    public void tipIsMarkedReadFalse(){
+        String luettu = "false";
+        assertFalse(driver.getPageSource().contains(luettu));
+    }
     @Then("system will respond with success")
     public void newTipIsAdded() {
         String content = "Harry Porter";

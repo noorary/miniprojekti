@@ -9,6 +9,8 @@ import project.main.Main;
 
 import spark.Spark;
 
+import java.io.File;
+
 
 public class ServerRule extends ExternalResource {
 
@@ -34,6 +36,8 @@ public class ServerRule extends ExternalResource {
     protected void after() {
         Spark.stop();
         db.refresh();
+        File file = new File("test.db");
+        file.delete();
     }
 }
  

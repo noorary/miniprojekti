@@ -1,5 +1,7 @@
 package project.domain;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author chenhuiz
@@ -11,14 +13,16 @@ public class Tip {
     private String description;
     private String url;
     private boolean checked;
+    private Timestamp checkedtime;
     
-    public Tip(long id, String title, String author, String description, String url, boolean checked) {
+    public Tip(long id, String title, String author, String description, String url, boolean checked, Timestamp checkedtime) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.description = description;
         this.url = url;
         this.checked = checked;
+        this.checkedtime = checkedtime;
     }
     
     public long getId() {
@@ -65,7 +69,14 @@ public class Tip {
         this.checked = checked;
     }
 
-    
+    public Timestamp getCheckedtime() {
+        return checkedtime;
+    }
+
+    public void setCheckedtime(Timestamp checkedtime) {
+        this.checkedtime = checkedtime;
+    }
+
     public int compareTo(Tip otherTip) {
         int titleDiff = this.title.compareToIgnoreCase(otherTip.title);
         return titleDiff;
