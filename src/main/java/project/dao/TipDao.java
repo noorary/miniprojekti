@@ -86,9 +86,10 @@ public class TipDao {
                     "SELECT * FROM Tip WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
             ResultSet res = stmt.executeQuery();
-            read = res.getBoolean("checked");
-            String title = res.getString("title");
-            System.out.println(title);
+            while(res.next()) {
+                read = res.getBoolean("checked");
+            }
+
         }catch(SQLException ex){
             Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
         }
