@@ -50,7 +50,7 @@
                     <td th:text="${tip.checkedtime}">checkedtime</td>
                     <td th:id="'luettu' + ${tip.id}">
                         <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
-                            Merkitse lukuvinkki luetuksi
+                            Merkitse lukuvinkki luetuksi/lukemattomaksi
                         </a>
                     </td>
                     <td th:id="'poisto' + ${tip.id}">
