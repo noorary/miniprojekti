@@ -52,7 +52,7 @@ public class DatabaseDao implements DaoManager {
 
     @Override
     public void markTipRead(String id){
-            this.tipDao.markAsRead(id);
+        this.tipDao.markAsRead(id);
 
     }
 }
