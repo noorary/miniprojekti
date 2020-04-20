@@ -47,16 +47,12 @@
                     <td th:text="${tip.author}">author</td>
                     <td th:text="${tip.description}">description</td>
                     <td th:text="${tip.checked}">checked</td>
-<<<<<<< HEAD
                     <td th:text="${tip.checkedtime}">checkedtime</td>
-                    <!-- <td><a>Tiedot</a></td> Tästä mennään lukuvinkin yksityissivulle, jossa on sen kaikki tiedot -->
                     <td th:id="'luettu' + ${tip.id}">
                         <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
                             Merkitse lukuvinkki luetuksi/lukemattomaksi
                         </a>
                     </td>
-=======
->>>>>>> master
                     <td th:id="'poisto' + ${tip.id}">
                         <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
                             Poista lukuvinkki
