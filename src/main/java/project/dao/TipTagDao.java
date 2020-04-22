@@ -20,27 +20,22 @@ public class TipTagDao {
     public TipTagDao(Database db) throws SQLException {
         this.conn = db.getConnection();
     }
-    
-    public void addTipTag(Tip tip, int tag_id) {
-        for (Tag tag: tip.getTags()) {
+
+    public void addTipTag(Tip tip, int tag_id) throws SQLException {
+        for (Tag tag : tip.getTags()) {
             if (tag.getId() == tag_id) {
                 return;
             }
         }
 
-        try {
-            PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO Tip_tag (tip_id, tag_id) "
-                    + "VALUES (?, ?)");
+        PreparedStatement stmt = conn.prepareStatement(
+                "INSERT INTO Tip_tag (tip_id, tag_id) "
+                + "VALUES (?, ?)");
 
-            stmt.setInt(1, tip.getId());
-            stmt.setInt(2, tag_id);
+        stmt.setInt(1, tip.getId());
+        stmt.setInt(2, tag_id);
 
-            stmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        stmt.executeUpdate();
     }
 
 }

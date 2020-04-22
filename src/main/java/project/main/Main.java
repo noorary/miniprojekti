@@ -3,7 +3,6 @@ package project.main;
 import java.sql.SQLException;
 import spark.ModelAndView;
 import spark.Spark;
-
 import java.util.HashMap;
 import project.dao.DaoManager;
 import project.dao.DatabaseDao;
@@ -12,7 +11,6 @@ import project.dao.TipDao;
 import project.dao.TipTagDao;
 import project.database.Database;
 import project.database.DatabaseImp;
-import project.domain.Tag;
 import project.domain.Tip;
 
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -38,22 +36,6 @@ public class Main {
             dao = new DatabaseDao(new TipDao(db, tagDao), tagDao, new TipTagDao(db));
         }
 
-        Spark.post("/newTag/:id", (req, res) -> {
-            String name = req.queryParams("name");
-            String tip_id = req.params(":id");
-
-            dao.addTag(name);
-            Tip tip = dao.findTip(tip_id);
-//                int tipId = dao.findTip(tip_id).getId();
-            int tagId = dao.findTag(name).getId();
-
-//                dao.addTipTag(tipId, tagId);
-            dao.addTipTag(tip, tagId);
-
-            res.redirect("/");
-            return "New tag added";
-        });
-
         Spark.get("/", (req, res) -> {
             HashMap data = new HashMap<>();
             data.put("tips", dao.listAllTips());
@@ -64,11 +46,22 @@ public class Main {
         Spark.get("/addNewTip", (req, res) -> {
             HashMap map = new HashMap<>();
 
-            return new ModelAndView(map, "tipList");
+            return new ModelAndView(map, "tipForm");
         }, new ThymeleafTemplateEngine());
 
         Spark.post("/newTip", (req, res) -> {
             dao.addTip(req.queryParams("title"), req.queryParams("author"), req.queryParams("description"), req.queryParams("url"));
+            
+            Tip tip = dao.findTip(req.queryParams("title"));
+            
+            String names = req.queryParams("tag");
+            
+            for (String name: names.split(", ")) {
+                dao.addTag(name);
+                int tagId = dao.findTag(name).getId();
+                dao.addTipTag(tip, tagId);
+            }
+            
             res.redirect("/");
             return "New tip added";
         });

@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import project.domain.Tag;
-
 import project.domain.Tip;
 
 /**
@@ -24,25 +23,23 @@ public class DatabaseDao implements DaoManager {
     }
 
     @Override
-    public void addTag(String name) {
+    public void addTag(String name) throws SQLException {
         this.tagDao.add(name);
     }
 
     @Override
-    public void addTipTag(Tip tip, int tag_id) {
-
+    public void addTipTag(Tip tip, int tag_id) throws SQLException {
         this.tipTagDao.addTipTag(tip, tag_id);
     }
-    
+
     @Override
     public Tag findTag(String name) throws SQLException {
         return this.tagDao.findOne(-1, name);
     }
-    
+
     @Override
-    public Tip findTip(String tipId) throws SQLException {
-        int tip_id = Integer.parseInt(tipId);
-        return this.tipDao.findOne(tip_id);
+    public Tip findTip(String title) throws SQLException {
+        return this.tipDao.findOne(title);
     }
 
     @Override
@@ -68,16 +65,12 @@ public class DatabaseDao implements DaoManager {
     }
 
     @Override
-    public void deleteTip(String id) {
-        try {
-            this.tipDao.delete(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void deleteTip(String id) throws SQLException {
+        this.tipDao.delete(id);
     }
 
     @Override
-    public void markTipRead(String id){
+    public void markTipRead(String id) throws SQLException {
         this.tipDao.markAsRead(id);
 
     }

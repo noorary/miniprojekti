@@ -24,9 +24,9 @@ public class TipDao {
         this.tagDao = tagDao;
     }
 
-    public Tip findOne(int tip_id) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip WHERE id = ?");
-        stmt.setInt(1, tip_id);
+    public Tip findOne(String title) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip WHERE title = ?");
+        stmt.setString(1, title);
 
         ResultSet result = stmt.executeQuery();
 
@@ -36,7 +36,6 @@ public class TipDao {
         }
 
         int id = result.getInt("id");
-        String title = result.getString("title");
         String author = result.getString("author");
         String description = result.getString("description");
         String url = result.getString("url");
@@ -48,7 +47,7 @@ public class TipDao {
 
         return tip;
     }
-
+    
     private List<Tag> findTags(int tip_id) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip_tag WHERE tip_id = ?");
         stmt.setInt(1, tip_id);
@@ -149,7 +148,7 @@ public class TipDao {
         }
     }
 
-    public void delete(String id) throws Exception {
+    public void delete(String id) throws SQLException {
         try {
             Integer.parseInt(id);
         } catch (Throwable t) {

@@ -7,7 +7,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
 
     <body>
@@ -34,12 +33,11 @@
                         <th>Otsikko</th>
                         <th>Tekijä</th>
                         <th>Kuvaus</th>
+                        <th>Tägit</th>
                         <th>Luettu</th>
                         <th>Milloin</th>
+                        <th>Luetuksi/lukemattomaksi</th>
                         <th></th>
-                        <th></th>
-                        <th>Tags</th>
-
                     </tr>
                 </thead>
                 <tr th:each="tip : ${tips}">
@@ -48,38 +46,25 @@
                     </td>
                     <td th:text="${tip.author}">author</td>
                     <td th:text="${tip.description}">description</td>
+                    <td>
+                        <div th:each="tag: ${tip.tags}">
+                            <span th:text="${tag.name}">Tag name</span>
+                        </div>
+                    </td>
                     <td th:text="${tip.checked}">checked</td>
                     <td th:text="${tip.checkedtime}">checkedtime</td>
                     <td th:id="'luettu' + ${tip.id}">
                         <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
-                            Merkitse lukuvinkki luetuksi/lukemattomaksi
+                            Merkitse
                         </a>
                     </td>
                     <td th:id="'poisto' + ${tip.id}">
                         <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
-                            Poista lukuvinkki
+                            Poista
                         </a>
-                    </td>
-                    <td>
-                        <form method="POST" th:action="@{~/newTag/{id}(id=${tip.id})}">
-                            <table class="table-borderless">
-                                <tr>
-                                    <td><label for="name">Tag name</label></td>
-                                    <td><input type="text" id="name" name="name"/> </td>
-                                    
-                                    <td><input type ="submit" name="submit" class="btn btn-success" value="Add tag"/></td>
-                                </tr>
-                            </table>
-                        </form>
-                        <ul>
-                            <li th:each="tag: ${tip.tags}">
-                                <span th:text="${tag.name}">Tag name</span>
-                            </li>
-                        </ul>
                     </td>
                 </tr>
             </tbody>
         </table>
-
     </body>
 </html> 

@@ -33,6 +33,7 @@ public class Tag {
 
     @Override
     public String toString() {
-        return "Name: " + this.name;
+        return "\nId: " + this.id +
+               "\nName: " + this.name;
     }
 }

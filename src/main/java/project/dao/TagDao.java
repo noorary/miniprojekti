@@ -22,7 +22,7 @@ public class TagDao {
     }
 
     public Tag findOne(int tag_id, String name) throws SQLException {
-        // Tageä etsitään id:n mukaan
+        // Tägeä haetaan id:n mukaan
         if (tag_id != -1) {
 
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tag WHERE id = ?");
@@ -43,7 +43,7 @@ public class TagDao {
             return tag;
         }
 
-        // Tägeä etsitään nimen mukaan
+        // Tägeä haetaan nimen mukaan
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tag WHERE name = ?");
         stmt.setString(1, name);
 
@@ -63,7 +63,6 @@ public class TagDao {
     }
 
     public void add(String name) {
-
         if (name.isEmpty()) {
             return;
         }

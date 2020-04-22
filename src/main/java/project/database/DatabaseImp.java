@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static spark.Spark.port;
 
 /**
@@ -15,7 +13,7 @@ import static spark.Spark.port;
 public class DatabaseImp implements Database {
 
     private String databaseUrl;
-    private Connection c;
+    private Connection connection;
 
     public DatabaseImp(String databaseUrl) throws SQLException {
         this.databaseUrl = databaseUrl;
@@ -39,23 +37,23 @@ public class DatabaseImp implements Database {
 
     @Override
     public Connection getConnection() throws SQLException {
-        if (c == null) {
+        if (connection == null) {
             if (System.getenv("JDBC_DATABASE_URL") == null) {
-                c = DriverManager.getConnection(databaseUrl);
+                connection = DriverManager.getConnection(databaseUrl);
             } else {
                 String dbstring = System.getenv("JDBC_DATABASE_URL");
                 return DriverManager.getConnection(dbstring);
             }
         }
 
-        return c;
+        return connection;
     }
 
     private void createTables() throws SQLException {
 
         String createTipTable;
         String createTagTable;
-        String createTipTagTable = null;
+        String createTipTagTable;
 
         if (System.getenv("JDBC_DATABASE_URL") == null) {
 

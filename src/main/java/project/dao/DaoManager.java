@@ -15,11 +15,11 @@ public interface DaoManager {
 
     void addTip(String title, String author, String description, String url) throws SQLException;
     
-    void deleteTip(String id);
+    void deleteTip(String id) throws SQLException;
 
-    void markTipRead(String id);
+    void markTipRead(String id) throws SQLException;
     
-    void addTag(String name);
+    void addTag(String name) throws SQLException;
     
     void addTipTag(Tip tip, int tag_id) throws SQLException;
     
