@@ -173,7 +173,7 @@ public class Stepdefs {
 
     @Then("tag with name {string} can be found from the tag column of the reading tip with title {string}")
     public void findRightTag(String name, String title) {
-        assertEquals(name, driver.findElement(By.id(title + name)).getText());
+        assertEquals(name+",", driver.findElement(By.id(title + name)).getText());
     }
     
     @And("there are {string} tags in the tag column of the reading tip with title {string}")
