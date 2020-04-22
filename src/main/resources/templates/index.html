@@ -38,6 +38,8 @@
                         <th>Milloin</th>
                         <th></th>
                         <th></th>
+                        <th>Tags</th>
+
                     </tr>
                 </thead>
                 <tr th:each="tip : ${tips}">
@@ -58,9 +60,26 @@
                             Poista lukuvinkki
                         </a>
                     </td>
+                    <td>
+                        <form method="POST" th:action="@{~/newTag/{id}(id=${tip.id})}">
+                            <table class="table-borderless">
+                                <tr>
+                                    <td><label for="name">Tag name</label></td>
+                                    <td><input type="text" id="name" name="name"/> </td>
+                                    
+                                    <td><input type ="submit" name="submit" class="btn btn-success" value="Add tag"/></td>
+                                </tr>
+                            </table>
+                        </form>
+                        <ul>
+                            <li th:each="tag: ${tip.tags}">
+                                <span th:text="${tag.name}">Tag name</span>
+                            </li>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
         </table>
-        
+
     </body>
 </html> 

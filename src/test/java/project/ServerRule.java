@@ -3,7 +3,9 @@ package project;
 import org.junit.rules.ExternalResource;
 import project.dao.DaoManager;
 import project.dao.DatabaseDao;
+import project.dao.TagDao;
 import project.dao.TipDao;
+import project.dao.TipTagDao;
 import project.database.DatabaseImp;
 import project.main.Main;
 
@@ -26,7 +28,9 @@ public class ServerRule extends ExternalResource {
         Spark.port(port);
         
         db = new DatabaseImp("jdbc:sqlite:test.db");
-        DaoManager dao = new DatabaseDao(new TipDao(db));
+        
+        TagDao tagDao = new TagDao(db);
+        DaoManager dao = new DatabaseDao(new TipDao(db, tagDao), tagDao, new TipTagDao(db));
         dao.addTip("Kukkakaali", "tekijä", "onpahan jotain", "www.linkki.com");
         Main.setDao(dao);
         Main.main(null);

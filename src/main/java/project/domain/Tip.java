@@ -1,21 +1,27 @@
 package project.domain;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author chenhuiz
  */
 public class Tip {
-    private final long id;
+
+    private final int id;
     private String title;
     private String author;
     private String description;
     private String url;
     private boolean checked;
     private Timestamp checkedtime;
-    
-    public Tip(long id, String title, String author, String description, String url, boolean checked, Timestamp checkedtime) {
+
+    private List<Tag> tags;
+
+    public Tip(int id, String title, String author, String description, String url, boolean checked, Timestamp checkedtime) {
+
         this.id = id;
         this.title = title;
         this.author = author;
@@ -23,9 +29,10 @@ public class Tip {
         this.url = url;
         this.checked = checked;
         this.checkedtime = checkedtime;
+        this.tags = new ArrayList<>();
     }
-    
-    public long getId() {
+
+    public int getId() {
         return id;
     }
 
@@ -52,7 +59,7 @@ public class Tip {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public String getUrl() {
         return url;
     }
@@ -60,11 +67,11 @@ public class Tip {
     public void setUrl(String url) {
         this.url = url;
     }
-    
+
     public boolean getChecked() {
         return checked;
     }
-    
+
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
@@ -76,18 +83,26 @@ public class Tip {
     public void setCheckedtime(Timestamp checkedtime) {
         this.checkedtime = checkedtime;
     }
+    
+    public List<Tag> getTags() {
+        return this.tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
     public int compareTo(Tip otherTip) {
         int titleDiff = this.title.compareToIgnoreCase(otherTip.title);
         return titleDiff;
     }
-    
+
     @Override
     public String toString() {
-        return "\nTitle: " + title + 
-                "\nAuthor: " + author +
-                "\nDescription: " + description +
-                "\nUrl: " + url +
-                "\nChecked: " + checked;
+        return "\nTitle: " + title
+                + "\nAuthor: " + author
+                + "\nDescription: " + description
+                + "\nUrl: " + url
+                + "\nChecked: " + checked;
     }
 }

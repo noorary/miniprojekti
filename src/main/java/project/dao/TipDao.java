@@ -5,9 +5,8 @@ import java.time.LocalDateTime;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import project.database.Database;
+import project.domain.Tag;
 import project.domain.Tip;
 
 /**
@@ -15,126 +14,154 @@ import project.domain.Tip;
  * @author chenhuiz
  */
 public class TipDao {
+
     private Boolean read;
     private Connection conn;
+    private TagDao tagDao;
 
-    public TipDao(Database db) throws SQLException {
+    public TipDao(Database db, TagDao tagDao) throws SQLException {
         this.conn = db.getConnection();
+        this.tagDao = tagDao;
     }
 
-    public List<Tip> listAll() {
+    public Tip findOne(int tip_id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip WHERE id = ?");
+        stmt.setInt(1, tip_id);
 
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM Tip");
+        ResultSet result = stmt.executeQuery();
 
-            List<Tip> tips = new ArrayList<>();
-
-            while (result.next()) {
-                int id = result.getInt("id");
-                String title = result.getString("title");
-                String author = result.getString("author");
-                String description = result.getString("description");
-                String url = result.getString("url");
-                boolean checked = result.getBoolean("checked");
-                Timestamp checkedtime = result.getTimestamp("checkedtime");
-
-                Tip tip = new Tip(id, title, author, description, url, checked, checkedtime);
-                tips.add(tip);
-            }
-
-            return tips;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
+        boolean hasOne = result.next();
+        if (!hasOne) {
             return null;
         }
 
+        int id = result.getInt("id");
+        String title = result.getString("title");
+        String author = result.getString("author");
+        String description = result.getString("description");
+        String url = result.getString("url");
+        boolean checked = result.getBoolean("checked");
+        Timestamp checkedtime = result.getTimestamp("checkedtime");
+
+        Tip tip = new Tip(id, title, author, description, url, checked, checkedtime);
+        tip.setTags(findTags(id));
+
+        return tip;
     }
 
-    public void add(String title, String author, String description, String url) {
+    private List<Tag> findTags(int tip_id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip_tag WHERE tip_id = ?");
+        stmt.setInt(1, tip_id);
+
+        ResultSet result = stmt.executeQuery();
+
+        List<Tag> tags = new ArrayList<>();
+
+        while (result.next()) {
+            int tag_id = result.getInt("tag_id");
+
+            Tag tag = this.tagDao.findOne(tag_id, null);
+
+            tags.add(tag);
+        }
+
+        return tags;
+    }
+
+    public List<Tip> listAll() throws SQLException {
+
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT * FROM Tip");
+
+        List<Tip> tips = new ArrayList<>();
+
+        while (result.next()) {
+            int id = result.getInt("id");
+            String title = result.getString("title");
+            String author = result.getString("author");
+            String description = result.getString("description");
+            String url = result.getString("url");
+            boolean checked = result.getBoolean("checked");
+            Timestamp checkedtime = result.getTimestamp("checkedtime");
+
+            Tip tip = new Tip(id, title, author, description, url, checked, checkedtime);
+
+            tip.setTags(findTags(id));
+            tips.add(tip);
+        }
+
+        return tips;
+
+    }
+
+    public void add(String title, String author, String description, String url) throws SQLException {
         if (title.isEmpty() || author.isEmpty() || description.isEmpty()) {
             return;
         }
+        PreparedStatement stmt = conn.prepareStatement(
+                "INSERT INTO Tip (title, author, description, url, checked, checkedtime) "
+                + "VALUES (?, ?, ?, ?, ?, null)");
 
-        try {
-            PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO Tip (title, author, description, url, checked, checkedtime) "
-                    + "VALUES (?, ?, ?, ?, ?, null)");
-
-            stmt.setString(1, title);
-            stmt.setString(2, author);
-            stmt.setString(3, description);
-            stmt.setString(4, url);
-            stmt.setBoolean(5, false);
-            stmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        stmt.setString(1, title);
+        stmt.setString(2, author);
+        stmt.setString(3, description);
+        stmt.setString(4, url);
+        stmt.setBoolean(5, false);
+        stmt.executeUpdate();
 
     }
 
-    public void markAsRead(String id) {
+    public void markAsRead(String id) throws SQLException {
         try {
             Integer.parseInt(id);
         } catch (Throwable t) {
             return;
         }
-        try{
-            PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT * FROM Tip WHERE id = ?");
-            stmt.setInt(1, Integer.parseInt(id));
-            ResultSet res = stmt.executeQuery();
-            while(res.next()) {
-                read = res.getBoolean("checked");
-            }
 
-        }catch(SQLException ex){
-            Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
+        PreparedStatement stmt = conn.prepareStatement(
+                "SELECT * FROM Tip WHERE id = ?");
+        stmt.setInt(1, Integer.parseInt(id));
+        ResultSet res = stmt.executeQuery();
+        while (res.next()) {
+            read = res.getBoolean("checked");
         }
 
-
         if (read == false) {
-            try {
-                PreparedStatement stmt = conn.prepareStatement(
-                        "UPDATE Tip SET checked = ?, checkedtime = ? WHERE id = ? ");
+            PreparedStatement stmt2 = conn.prepareStatement(
+                    "UPDATE Tip SET checked = ?, checkedtime = ? WHERE id = ? ");
 
-                LocalDateTime now = LocalDateTime.now();
-                Timestamp timestamp = Timestamp.valueOf(now);
-                stmt.setBoolean(1, true);
-                stmt.setTimestamp(2, timestamp);
-                stmt.setInt(3, Integer.parseInt(id));
-                stmt.execute();
+            LocalDateTime now = LocalDateTime.now();
+            Timestamp timestamp = Timestamp.valueOf(now);
+            stmt2.setBoolean(1, true);
+            stmt2.setTimestamp(2, timestamp);
+            stmt2.setInt(3, Integer.parseInt(id));
+            stmt2.execute();
 
-            } catch (SQLException ex) {
-                Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
         } else {
-            try {
-                PreparedStatement stmt = conn.prepareStatement(
-                        "UPDATE Tip SET checked = ?, checkedtime = ? WHERE id = ? ");
+            PreparedStatement stmt2 = conn.prepareStatement(
+                    "UPDATE Tip SET checked = ?, checkedtime = ? WHERE id = ? ");
 
-                stmt.setBoolean(1, false);
-                stmt.setTimestamp(2, null);
-                stmt.setInt(3, Integer.parseInt(id));
-                stmt.execute();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(TipDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            stmt2.setBoolean(1, false);
+            stmt2.setTimestamp(2, null);
+            stmt2.setInt(3, Integer.parseInt(id));
+            stmt2.execute();
 
         }
     }
-    
+
     public void delete(String id) throws Exception {
-    	try {
+        try {
             Integer.parseInt(id);
-    	} catch (Throwable t) {
+        } catch (Throwable t) {
             return;
-    	}
-    	PreparedStatement stmt = conn.prepareStatement("DELETE FROM Tip WHERE id = ?");
-    	stmt.setInt(1,  Integer.parseInt(id));
-    	stmt.execute();
+        }
+
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Tip WHERE id = ?");
+        stmt.setInt(1, Integer.parseInt(id));
+        stmt.execute();
+
+        PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM Tip_tag WHERE tip_id = ?");
+        stmt2.setInt(1, Integer.parseInt(id));
+        stmt2.execute();
     }
 }
