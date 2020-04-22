@@ -56,10 +56,12 @@ public class Main {
             
             String names = req.queryParams("tag");
             
-            for (String name: names.split(", ")) {
-                dao.addTag(name);
-                int tagId = dao.findTag(name).getId();
-                dao.addTipTag(tip, tagId);
+            if (!names.isEmpty()) {
+                for (String name : names.split(", ")) {
+                    dao.addTag(name);
+                    int tagId = dao.findTag(name).getId();
+                    dao.addTipTag(tip, tagId);
+                }
             }
             
             res.redirect("/");
