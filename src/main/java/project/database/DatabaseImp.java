@@ -76,17 +76,4 @@ public class DatabaseImp implements Database {
         Statement stmt = getConnection().createStatement();
         stmt.executeUpdate(createTipTable);
     }
-    
-    public void refresh() {
-        try {
-            String drop = "DROP TABLE IF EXISTS Tip;";
-            
-            Statement stmt = getConnection().createStatement();
-            stmt.executeUpdate(drop);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseImp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 }

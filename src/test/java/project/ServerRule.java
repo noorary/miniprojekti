@@ -35,7 +35,6 @@ public class ServerRule extends ExternalResource {
     @Override
     protected void after() {
         Spark.stop();
-        db.refresh();
         File file = new File("test.db");
         file.delete();
     }
