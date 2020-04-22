@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import spark.ModelAndView;
 import spark.Spark;
 import java.util.HashMap;
+import java.util.List;
 import project.dao.DaoManager;
 import project.dao.DatabaseDao;
 import project.dao.TagDao;
@@ -11,6 +12,7 @@ import project.dao.TipDao;
 import project.dao.TipTagDao;
 import project.database.Database;
 import project.database.DatabaseImp;
+import project.domain.Tag;
 import project.domain.Tip;
 
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -52,15 +54,18 @@ public class Main {
         Spark.post("/newTip", (req, res) -> {
             dao.addTip(req.queryParams("title"), req.queryParams("author"), req.queryParams("description"), req.queryParams("url"));
             
-            Tip tip = dao.findTip(req.queryParams("title"));
-            
             String names = req.queryParams("tag");
             
             if (!names.isEmpty()) {
+                Tip tip = dao.findTip(req.queryParams("title"));
+                
                 for (String name : names.split(", ")) {
+                    List<Tag> tags = dao.findTags(tip.getId());
+                    
                     dao.addTag(name);
+                    
                     int tagId = dao.findTag(name).getId();
-                    dao.addTipTag(tip, tagId);
+                    dao.addTipTag(tip.getId(), tagId, tags);
                 }
             }
             

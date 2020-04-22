@@ -48,7 +48,7 @@ public class TipDao {
         return tip;
     }
     
-    private List<Tag> findTags(int tip_id) throws SQLException {
+    public List<Tag> findTags(int tip_id) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip_tag WHERE tip_id = ?");
         stmt.setInt(1, tip_id);
 

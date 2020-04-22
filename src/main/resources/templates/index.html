@@ -40,7 +40,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tr th:each="tip : ${tips}">
+                <tr th:each="tip : ${tips}" th:id="'row' + ${tip.title}">
                     <td>
                         <a th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
                     </td>
@@ -48,7 +48,7 @@
                     <td th:text="${tip.description}">description</td>
                     <td>
                         <div th:each="tag: ${tip.tags}">
-                            <span th:text="${tag.name}">Tag name</span>
+                            <span th:text="${tag.name} + ','" th:id="${tip.title} + ${tag.name}">Tag name</span>
                         </div>
                     </td>
                     <td th:text="${tip.checked}">checked</td>

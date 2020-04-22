@@ -3,6 +3,7 @@ package project.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import project.database.Database;
 import project.domain.Tag;
 import project.domain.Tip;
@@ -19,8 +20,9 @@ public class TipTagDao {
         this.conn = db.getConnection();
     }
 
-    public void addTipTag(Tip tip, int tag_id) throws SQLException {
-        for (Tag tag : tip.getTags()) {
+    public void addTipTag(int tip_id, int tag_id, List<Tag> tags) throws SQLException {
+        
+        for (Tag tag : tags) {
             if (tag.getId() == tag_id) {
                 return;
             }
@@ -30,7 +32,7 @@ public class TipTagDao {
                 "INSERT INTO Tip_tag (tip_id, tag_id) "
                 + "VALUES (?, ?)");
 
-        stmt.setInt(1, tip.getId());
+        stmt.setInt(1, tip_id);
         stmt.setInt(2, tag_id);
 
         stmt.executeUpdate();

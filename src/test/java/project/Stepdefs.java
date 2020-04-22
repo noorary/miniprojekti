@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import java.util.List;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
@@ -21,7 +22,6 @@ public class Stepdefs {
     public void setup() {
         this.driver = new HtmlUnitDriver();
         this.baseUrl = "http://localhost:4566";
-//        driver.get(baseUrl);
     }
 
     @Given("page with reading tip form is selected")
@@ -94,37 +94,39 @@ public class Stepdefs {
     @When("the tip is deleted")
     public void theTipIsDeleted() throws InterruptedException {
         WebElement element = driver.findElement(By.id("poisto1"));
-        WebElement a = element.findElement(By.linkText("Poista lukuvinkki"));
+        WebElement a = element.findElement(By.linkText("Poista"));
         a.click();
     }
-    
+
     @When("the tip is marked as read")
-    public void theTipIsMarkedAsRead() throws  InterruptedException{
+    public void theTipIsMarkedAsRead() throws InterruptedException {
         WebElement element = driver.findElement(By.id("luettu1"));
-        WebElement luettubutton = element.findElement(By.linkText("Merkitse lukuvinkki luetuksi/lukemattomaksi"));
+        WebElement luettubutton = element.findElement(By.linkText("Merkitse"));
         luettubutton.click();
     }
 
     @When("the tip is marked as read and toggled again")
-    public void theTipIsMarkedAsReadTwice() throws  InterruptedException{
+    public void theTipIsMarkedAsReadTwice() throws InterruptedException {
         WebElement element1 = driver.findElement(By.id("luettu1"));
-        WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse lukuvinkki luetuksi/lukemattomaksi"));
+        WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse"));
         luettubutton1.click();
         WebElement element2 = driver.findElement(By.id("luettu1"));
-        WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse lukuvinkki luetuksi/lukemattomaksi"));
+        WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse"));
         luettubutton2.click();
     }
 
     @Then("system will respond with marked as read true")
-    public void tipIsMarkedReadTrue(){
+    public void tipIsMarkedReadTrue() {
         String luettu = "true";
         assertTrue(driver.getPageSource().contains(luettu));
     }
+
     @Then("system will respond with marked as read false")
-    public void tipIsMarkedReadFalse(){
+    public void tipIsMarkedReadFalse() {
         String luettu = "false";
         assertFalse(driver.getPageSource().contains(luettu));
     }
+
     @Then("system will respond with success")
     public void newTipIsAdded() {
         String content = "Harry Porter";
@@ -155,33 +157,32 @@ public class Stepdefs {
     @Given("a reading tip with title {string}, author {string}, description {string} and url {string} is added")
     public void addNewTip(String title, String author, String description, String url) {
         goToTipForm();
-        addTip(title, author, description, url);
-    }
-
-    @And("a reading tip with title {string}, author {string}, description {string} and url {string} is added")
-    public void addAnotherTip(String title, String author, String description, String url) {
-        goToTipForm();
-        addTip(title, author, description, url);
+        fillTipInfo(title, author, description, url);
     }
 
     @When("a tag with name {string} is added to the reading tip with title {string}")
     public void addNewTag(String name, String title) {
-        addTag(name, title);
+        fillTagInfo(name, title);
     }
 
-    @And("a tag with name {string} is added to the reading tip with title {string}")
-    public void addAnotherTag(String name, String title) {
-        addTag(name, title);
+    @And("submit tip form")
+    public void submitTipForm() {
+        submitForm();
+        assertTrue(driver.getPageSource().contains("Sovellus, jonka avulla voit laittaa"));
     }
 
-    @Then("one tag with name {string} can be found in the tag column of the reading tip with title {string}")
-    public void findOneTag(String name, String title) {
-        findTag(name, title);
+    @Then("tag with name {string} can be found from the tag column of the reading tip with title {string}")
+    public void findRightTag(String name, String title) {
+        assertEquals(name, driver.findElement(By.id(title + name)).getText());
     }
-
-    @And("one tag with name {string} can be found in the tag column of the reading tip with title {string}")
-    public void findAnotherTag(String name, String title) {
-        findTag(name, title);
+    
+    @And("there are {string} tags in the tag column of the reading tip with title {string}")
+    public void tagNumbersCorrect(String num, String title) {
+        
+        String path = "//*[@id=\"row" + title + "\"]/td[4]/child::div";
+        List<WebElement> rows = driver.findElements(By.xpath(path));
+        
+        assertEquals(Integer.parseInt(num), rows.size());
     }
 
     private void goToTipForm() {
@@ -190,7 +191,7 @@ public class Stepdefs {
         element.click();
     }
 
-    private void addTip(String title, String author, String description, String url) {
+    private void fillTipInfo(String title, String author, String description, String url) {
         WebElement element = driver.findElement(By.name("title"));
         element.sendKeys(title);
         element = driver.findElement(By.name("author"));
@@ -199,16 +200,17 @@ public class Stepdefs {
         element.sendKeys(description);
         element = driver.findElement(By.name("url"));
         element.sendKeys(url);
-        element = driver.findElement(By.name("submit"));
+    }
+
+    private void fillTagInfo(String name, String title) {
+        assertTrue(driver.getPageSource().contains(title));
+        WebElement element = driver.findElement(By.name("tag"));
+        element.sendKeys(name + ", ");
+    }
+
+    private void submitForm() {
+        WebElement element = driver.findElement(By.name("submit"));
         element.click();
-    }
-
-    private void addTag(String name, String title) {
-
-    }
-
-    private void findTag(String name, String title) {
-
     }
 
     @After

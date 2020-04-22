@@ -28,13 +28,18 @@ public class DatabaseDao implements DaoManager {
     }
 
     @Override
-    public void addTipTag(Tip tip, int tag_id) throws SQLException {
-        this.tipTagDao.addTipTag(tip, tag_id);
+    public void addTipTag(int tip_id, int tag_id, List<Tag> tags) throws SQLException {
+        this.tipTagDao.addTipTag(tip_id, tag_id, tags);
     }
 
     @Override
     public Tag findTag(String name) throws SQLException {
         return this.tagDao.findOne(-1, name);
+    }
+
+    @Override
+    public List<Tag> findTags(int tip_id) throws SQLException {
+        return this.tipDao.findTags(tip_id);
     }
 
     @Override
