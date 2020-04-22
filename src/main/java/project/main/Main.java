@@ -24,28 +24,19 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello world");
-//        String database = null;
 
-        if (System.getenv("JDBC_DATABASE_URL") != null) {
-//            database = System.getenv("JDBC_DATABASE_URL");
-            db = new DatabaseImp(System.getenv("JDBC_DATABASE_URL"));
+        if (dao == null) {
+            String databaseUrl;
+            if (System.getenv("JDBC_DATABASE_URL") != null) {
+                databaseUrl = System.getenv("JDBC_DATABASE_URL");
+            } else {
+                databaseUrl = "jdbc:sqlite:lukuvinkki.db";
+            }
+            
+            db = new DatabaseImp(databaseUrl);
             TagDao tagDao = new TagDao(db);
             dao = new DatabaseDao(new TipDao(db, tagDao), tagDao, new TipTagDao(db));
-
-        } else if (dao == null) {
-//            database = "jdbc:sqlite:lukuvinkki.db";
-            db = new DatabaseImp("jdbc:sqlite:lukuvinkki.db");
-            TagDao tagDao = new TagDao(db);
-//            dao = new DatabaseDao(new TipDao(db), new TagDao(db), new TipTagDao(db));
-            dao = new DatabaseDao(new TipDao(db, tagDao), tagDao, new TipTagDao(db));
-
         }
-        
-//        if (dao == null) {
-//            db = new DatabaseImp(database);
-//            TagDao tagDao = new TagDao(db);
-//            dao = new DatabaseDao(new TipDao(db, tagDao), tagDao, new TipTagDao(db));
-//        }
 
         Spark.post("/newTag/:id", (req, res) -> {
             String name = req.queryParams("name");
