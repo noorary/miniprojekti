@@ -1,6 +1,8 @@
 package project.dao;
 
+import java.sql.SQLException;
 import java.util.List;
+import project.domain.Tag;
 import project.domain.Tip;
 
 /**
@@ -9,11 +11,21 @@ import project.domain.Tip;
  */
 public interface DaoManager {
 
-    List<Tip> listAll();
+    List<Tip> listAllTips() throws SQLException;
 
-    void addTip(String title, String author, String description, String url);
+    void addTip(String title, String author, String description, String url) throws SQLException;
+
+    void deleteTip(String id) throws SQLException;
+
+    void markTipRead(String id) throws SQLException;
+
+    void addTag(String name) throws SQLException;
+
+    void addTipTag(int tip_id, int tag_id, List<Tag> tags) throws SQLException;
+
+    Tag findTag(String name) throws SQLException;
     
-    void deleteTip(String id);
+    List<Tag> findTags(int tip_id) throws SQLException;
 
-    void markTipRead(String id);
+    Tip findTip(String tipId) throws SQLException;
 }

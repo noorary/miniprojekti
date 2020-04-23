@@ -7,7 +7,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
 
     <body>
@@ -34,33 +33,38 @@
                         <th>Otsikko</th>
                         <th>Tekijä</th>
                         <th>Kuvaus</th>
+                        <th>Tägit</th>
                         <th>Luettu</th>
                         <th>Milloin</th>
-                        <th></th>
+                        <th>Luetuksi/lukemattomaksi</th>
                         <th></th>
                     </tr>
                 </thead>
-                <tr th:each="tip : ${tips}">
+                <tr th:each="tip : ${tips}" th:id="'row' + ${tip.title}">
                     <td>
                         <a th:target="_blank" th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
                     </td>
                     <td th:text="${tip.author}">author</td>
                     <td th:text="${tip.description}">description</td>
+                    <td>
+                        <div th:each="tag: ${tip.tags}">
+                            <span th:text="${tag.name} + ','" th:id="${tip.title} + ${tag.name}">Tag name</span>
+                        </div>
+                    </td>
                     <td th:text="${tip.checked}">checked</td>
                     <td th:text="${tip.checkedtime}">checkedtime</td>
                     <td th:id="'luettu' + ${tip.id}">
                         <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
-                            Merkitse lukuvinkki luetuksi/lukemattomaksi
+                            Merkitse
                         </a>
                     </td>
                     <td th:id="'poisto' + ${tip.id}">
                         <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
-                            Poista lukuvinkki
+                            Poista
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        
     </body>
 </html> 
