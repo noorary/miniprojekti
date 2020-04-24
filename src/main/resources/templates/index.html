@@ -25,13 +25,19 @@
             <h1>Lukuvinkki</h1>
         </div>
         <p>Sovellus, jonka avulla voit laittaa lukuvinkkisi järjestykseen!</p>
-        <form method="POST" action="/byTag/{tag}(text=searchField">
+        <form method="POST" action="/byTag">
             <div class="form-group w-25">
                 <input type="text" id="searchField" name="searchField" class="form-control" placeholder="hae tägillä tai otsikolla">
                 <button type="submit" class="btn btn-primary">Hae tägillä</button>
                 <button type="button" class="btn btn-primary">Hae otsikolla</button>
             </div>
         </form>
+        
+        <ul>
+            <li th:each="tip: ${tipsByTag}">
+                <span th:text="tip.title">Otsikko</span>
+            </li>
+        </ul>
         
         <table class="table table-bordered" style="margin-top: 20px;">
             <tbody>

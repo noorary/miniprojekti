@@ -41,6 +41,7 @@ public class Main {
         Spark.get("/", (req, res) -> {
             HashMap data = new HashMap<>();
             data.put("tips", dao.listAllTips());
+//            data.put("tipsByTag", dao.getTipsWithTag(req.params("tag")));
 
             return new ModelAndView(data, "index");
         }, new ThymeleafTemplateEngine());
@@ -84,14 +85,15 @@ public class Main {
             return "Tip deleted";
         });
 
-        Spark.post("/byTag/:tag", (req, res) -> {
-            dao.getTipsWithTag(req.params("tag"));
+        Spark.post("/byTag", (req, res) -> {
             HashMap data = new HashMap<>();
-            data.put("tipsByTag", dao.getTipsWithTag(req.params("tag")));
+            
+            data.put("tipsByTag", dao.getTipsWithTag(req.queryParams("searchField")));
+            data.put("tips", dao.listAllTips());
+            
+            return new ModelAndView(data, "index");
 
-            res.redirect("/byTag");
-            return "Searched by tag";
-        });
+        }, new ThymeleafTemplateEngine());
 
     }
 
