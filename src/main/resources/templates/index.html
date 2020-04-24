@@ -35,7 +35,7 @@
         
         <ul>
             <li th:each="tip: ${tipsByTag}">
-                <span th:text="tip.title">Otsikko</span>
+                <span th:text="${tip.title}">Otsikko</span>
             </li>
         </ul>
         
