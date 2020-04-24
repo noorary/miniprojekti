@@ -28,4 +28,6 @@ public interface DaoManager {
     List<Tag> findTags(int tip_id) throws SQLException;
 
     Tip findTip(String tipId) throws SQLException;
+
+    List<Tip> getTipsWithTag(String name) throws SQLException;
 }

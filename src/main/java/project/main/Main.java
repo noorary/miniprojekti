@@ -83,6 +83,16 @@ public class Main {
             res.redirect("/");
             return "Tip deleted";
         });
+
+        Spark.post("/byTag/:tag", (req, res) -> {
+            dao.getTipsWithTag(req.params("tag"));
+            HashMap data = new HashMap<>();
+            data.put("tipsByTag", dao.getTipsWithTag(req.params("tag")));
+
+            res.redirect("/byTag");
+            return "Searched by tag";
+        });
+
     }
 
     public static void setDao(DaoManager dao) {

@@ -2,7 +2,9 @@ package project.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import project.database.Database;
 import project.domain.Tag;
@@ -37,5 +39,7 @@ public class TipTagDao {
 
         stmt.executeUpdate();
     }
+
+    
 
 }
