@@ -107,24 +107,33 @@ public class Stepdefs {
 
     @When("the tip is marked as read and toggled again")
     public void theTipIsMarkedAsReadTwice() throws InterruptedException {
-        WebElement element1 = driver.findElement(By.id("luettu1"));
+        WebElement element1 = driver.findElement(By.id("luettu2"));
         WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse"));
         luettubutton1.click();
-        WebElement element2 = driver.findElement(By.id("luettu1"));
+        WebElement element2 = driver.findElement(By.id("luettu2"));
         WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse"));
         luettubutton2.click();
+    }
+
+    @Then("frontpage has all tips added")
+    public void tipListWorks(){
+        String content1 = "Ruusukaali";
+        String content2 = "Keräkaali";
+        String content3 = "Kukkakaali";
+        String content4 = "Porkkana";
+        assertTrue(driver.getPageSource().contains(content1) && driver.getPageSource().contains(content2) && driver.getPageSource().contains(content3) && driver.getPageSource().contains(content4));
     }
 
     @Then("system will respond with marked as read true")
     public void tipIsMarkedReadTrue() {
         String luettu = "true";
-        assertTrue(driver.getPageSource().contains(luettu));
+        assertTrue(luettu.equals(driver.findElement(By.id("checked1")).getText()));
     }
 
     @Then("system will respond with marked as read false")
     public void tipIsMarkedReadFalse() {
         String luettu = "false";
-        assertFalse(driver.getPageSource().contains(luettu));
+        assertTrue(luettu.equals(driver.findElement(By.id("checked2")).getText()));
     }
 
     @Then("system will respond with success")
