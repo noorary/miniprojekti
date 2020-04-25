@@ -196,4 +196,27 @@ public class TipDao {
 
         
     }
+    
+    public List<Tip> getTipsWithTitle(String search) throws SQLException {
+    	PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip WHERE title = ?");
+    	stmt.setString(1, search);
+        ResultSet result = stmt.executeQuery();
+        List<Tip> tips = new ArrayList<>();
+        
+        while (result.next()) {
+            int id = result.getInt("id");
+            String title = result.getString("title");
+            String author = result.getString("author");
+            String description = result.getString("description");
+            String url = result.getString("url");
+            boolean checked = result.getBoolean("checked");
+            Timestamp checkedtime = result.getTimestamp("checkedtime");
+
+            Tip tip = new Tip(id, title, author, description, url, checked, checkedtime);
+
+            tip.setTags(findTags(id));
+            tips.add(tip);
+        }
+        return tips;
+    }
 }

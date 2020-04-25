@@ -89,6 +89,7 @@ public class Main {
             HashMap data = new HashMap<>();
             
             data.put("tipsByTag", dao.getTipsWithTag(req.queryParams("searchField")));
+            data.put("tipsByTitle", dao.getTipsWithTitle(req.queryParams("searchField")));
             data.put("tips", dao.listAllTips());
             
             return new ModelAndView(data, "index");
