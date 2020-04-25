@@ -29,7 +29,7 @@
             <div class="form-group w-25">
                 <input type="text" id="searchField" name="searchField" class="form-control" placeholder="hae tägillä tai otsikolla">
                 <button type="submit" class="btn btn-primary">Hae tägillä</button>
-                <button type="submit" class="btn btn-primary">Hae otsikolla</button>
+                <button type="submit" formaction="/byTitle" class="btn btn-primary">Hae otsikolla</button>
             </div>
         </form>
         
@@ -37,13 +37,7 @@
             <li th:each="tip: ${tipsByTag}">
                 <span th:text="${tip.title}">Otsikko</span>
             </li>
-        </ul>
-        
-        <ul>
-            <li th:each="tip: ${tipsByTitle}">
-                <a th:target="_blank" th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
-            </li>
-        </ul>
+        </ul>        
         
         <table class="table table-bordered" style="margin-top: 20px;">
             <tbody>

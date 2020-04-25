@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
+    <head>
+        <title>Lukuvinkki</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm bg-success navbar-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" style="font-size: 25px;" th:href="@{~/addNewTip}">Lisää lukuvinkki</a>
+                </li>
+            </ul>
+        </nav>
+        <h2>Otsikon mukaan löytyneet lukuvinkit</h2>
+        <ul>
+            <li th:each="tip: ${tipsByTitle}">
+                <a th:target="_blank" th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
+            </li>
+        </ul>
+    </body>
+</html>
