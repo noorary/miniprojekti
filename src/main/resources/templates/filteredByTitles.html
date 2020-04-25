@@ -19,11 +19,35 @@
                 </li>
             </ul>
         </nav>
-        <h2>Otsikon mukaan löytyneet lukuvinkit</h2>
-        <ul>
-            <li th:each="tip: ${tipsByTitle}">
-                <a th:target="_blank" th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
-            </li>
-        </ul>
+        <div style="padding: 10px 0px;">
+            <h1>Otsikon mukaan löytyneet lukuvinkit</h1>
+        </div>        
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Otsikko</th>
+                        <th>Tekijä</th>
+                        <th>Kuvaus</th>
+                        <th>Tägit</th>
+                    </tr>
+                </thead>
+                <tr th:each="tip : ${tipsByTitle}" th:id="'row' + ${tip.title}">
+                    <td>
+                        <a th:target="_blank" th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
+                    </td>
+                    <td th:text="${tip.author}">author</td>
+                    <td th:text="${tip.description}">description</td>
+                    <td>
+                        <div th:each="tag: ${tip.tags}">
+                            <span th:text="${tag.name} + ','" th:id="${tip.title} + ${tag.name}">Tag name</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="padding: 10px 0px;">
+            <a th:href="@{~/}" class="btn btn-primary">Takaisin</a>
+        </div>
     </body>
 </html>
