@@ -91,7 +91,7 @@ public class Main {
             data.put("tipsByTag", dao.getTipsWithTag(req.queryParams("searchField")));
             data.put("tips", dao.listAllTips());
             
-            return new ModelAndView(data, "index");
+            return new ModelAndView(data, "filteredByTags");
 
         }, new ThymeleafTemplateEngine());
 
