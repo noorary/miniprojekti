@@ -107,10 +107,10 @@ public class Stepdefs {
 
     @When("the tip is marked as read and toggled again")
     public void theTipIsMarkedAsReadTwice() throws InterruptedException {
-        WebElement element1 = driver.findElement(By.id("luettu1"));
+        WebElement element1 = driver.findElement(By.id("luettu2"));
         WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse"));
         luettubutton1.click();
-        WebElement element2 = driver.findElement(By.id("luettu1"));
+        WebElement element2 = driver.findElement(By.id("luettu2"));
         WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse"));
         luettubutton2.click();
     }
@@ -124,7 +124,7 @@ public class Stepdefs {
     @Then("system will respond with marked as read false")
     public void tipIsMarkedReadFalse() {
         String luettu = "false";
-        assertFalse(driver.getPageSource().contains(luettu));
+        assertTrue(luettu.equals(driver.findElement(By.id("checked2")).getText()));
     }
 
     @Then("system will respond with success")

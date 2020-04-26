@@ -30,7 +30,7 @@
                 <div style="padding:25px 0px"> 
                     <input type="text" id="searchField" name="searchField" class="form-control" placeholder="hae tägillä tai otsikolla">
                 </div>
-                <button type="submit" class="btn btn-primary">Hae tägillä</button>
+                <button type="submit" name="tagSearch" class="btn btn-primary">Hae tägillä</button>
                 <button type="submit" name="titleButton" formaction="/byTitle" class="btn btn-primary">Hae otsikolla</button>
             </div>
         </form>
@@ -60,7 +60,7 @@
                             <span th:text="${tag.name} + ','" th:id="${tip.title} + ${tag.name}">Tag name</span>
                         </div>
                     </td>
-                    <td th:text="${tip.checked}">checked</td>
+                    <td th:text="${tip.checked}" th:id="'checked' + ${tip.id}">checked</td>
                     <td th:text="${tip.checkedtime}">checkedtime</td>
                     <td th:id="'luettu' + ${tip.id}">
                         <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
