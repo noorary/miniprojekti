@@ -27,7 +27,9 @@
         <p>Sovellus, jonka avulla voit laittaa lukuvinkkisi järjestykseen!</p>
         <form method="POST" action="/byTag">
             <div class="form-group w-25">
-                <input type="text" id="searchField" name="searchField" class="form-control" placeholder="hae tägillä tai otsikolla">
+                <div style="padding:25px 0px"> 
+                    <input type="text" id="searchField" name="searchField" class="form-control" placeholder="hae tägillä tai otsikolla">
+                </div>
                 <button type="submit" class="btn btn-primary">Hae tägillä</button>
                 <button type="submit" name="titleButton" formaction="/byTitle" class="btn btn-primary">Hae otsikolla</button>
             </div>
