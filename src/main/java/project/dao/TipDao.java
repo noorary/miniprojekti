@@ -165,9 +165,9 @@ public class TipDao {
     }
 
     public List<Tip> getTipsWithTag(String tagName) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tag" 
-                + " INNER JOIN Tip_tag ON Tag.id = Tip_tag.tag_id "
-                + " INNER JOIN Tip ON Tip.id = Tip_tag.tip_id"
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip" 
+                + " INNER JOIN Tip_tag ON Tip.id = Tip_tag.tip_id "
+                + " INNER JOIN Tag ON Tag.id = Tip_tag.tag_id"
                 + " WHERE Tag.name = ?");
 
         stmt.setString(1, tagName);

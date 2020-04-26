@@ -2,37 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
     <head>
-        <title>Mahtavin Lukuvinkki-sovellus</title>
+        <title>Lukuvinkki</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </head>
-
     <body>
-
         <nav class="navbar navbar-expand-sm bg-success navbar-dark">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" style="font-size: 25px;" th:href="@{~/}">Koti</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" style="font-size: 25px;" th:href="@{~/addNewTip}">Lisää lukuvinkki</a>
                 </li>
             </ul>
         </nav>
         <div style="padding: 10px 0px;">
-            <h1>Lukuvinkki</h1>
-        </div>
-        <p>Sovellus, jonka avulla voit laittaa lukuvinkkisi järjestykseen!</p>
-        <form method="POST" action="/byTag">
-            <div class="form-group w-25">
-                <input type="text" id="searchField" name="searchField" class="form-control" placeholder="hae tägillä tai otsikolla">
-                <button type="submit" class="btn btn-primary">Hae tägillä</button>
-                <button type="submit" name="titleButton" formaction="/byTitle" class="btn btn-primary">Hae otsikolla</button>
-            </div>
-        </form>
-
+            <h1>Tägin mukaan löytyneet lukuvinkit</h1>
+        </div>        
         <table class="table table-bordered" style="margin-top: 20px;">
             <tbody>
                 <thead class="thead-dark">
@@ -41,13 +30,9 @@
                         <th>Tekijä</th>
                         <th>Kuvaus</th>
                         <th>Tägit</th>
-                        <th>Luettu</th>
-                        <th>Milloin</th>
-                        <th>Luetuksi/lukemattomaksi</th>
-                        <th></th>
                     </tr>
                 </thead>
-                <tr th:each="tip : ${tips}" th:id="'row' + ${tip.title}">
+                <tr th:each="tip : ${tipsByTag}" th:id="'row' + ${tip.tags}">
                     <td>
                         <a th:target="_blank" th:href="@{${tip.url}}"><p th:text="${tip.title}"></p></a>
                     </td>
@@ -58,20 +43,11 @@
                             <span th:text="${tag.name} + ','" th:id="${tip.title} + ${tag.name}">Tag name</span>
                         </div>
                     </td>
-                    <td th:text="${tip.checked}">checked</td>
-                    <td th:text="${tip.checkedtime}">checkedtime</td>
-                    <td th:id="'luettu' + ${tip.id}">
-                        <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
-                            Merkitse
-                        </a>
-                    </td>
-                    <td th:id="'poisto' + ${tip.id}">
-                        <a th:href="@{~/allTips/delete/{id}(id=${tip.id})}" class="btn btn-danger" role="button">
-                            Poista
-                        </a>
-                    </td>
                 </tr>
             </tbody>
         </table>
+        <div style="padding: 10px 0px;">
+            <a th:href="@{~/}" class="btn btn-primary">Takaisin</a>
+        </div>
     </body>
-</html> 
+</html>
