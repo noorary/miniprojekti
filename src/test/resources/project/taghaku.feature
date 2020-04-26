@@ -12,3 +12,10 @@ Feature: User can search tips by tag
         And submit tag search
         Then results contain tip with title "The Guardian" and tag "article"
         And there is "1" row in the search results
+
+    Scenario: result page does not contain anything if searched tag is not used
+        Given a reading tip with title "Helsingin sanomat", author "sanoma", description "uutisia", url "www.hs.fi" and tags "uutiset" is added
+        When search form is filled with name "hesari"
+        And submit tag search
+        Then results don't contain tip with title "Helsingin sanomat"
+        And there is "0" row in the search results

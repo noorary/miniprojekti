@@ -213,6 +213,11 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(title) && driver.getPageSource().contains(tag));
     }
 
+    @Then("results don't contain tip with title {string}")
+    public void resultsDontContain(String title) {
+        assertFalse(driver.getPageSource().contains(title));
+    }
+
     @And("there is {string} row in the search results")
     public void rightNumberOfRows(String num) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@class='table table-bordered']/tbody/tr")); 
