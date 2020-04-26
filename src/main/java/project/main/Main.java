@@ -88,10 +88,17 @@ public class Main {
             HashMap data = new HashMap<>();
             
             data.put("tipsByTag", dao.getTipsWithTag(req.queryParams("searchField")));
-            // data.put("tips", dao.listAllTips());
-
             
             return new ModelAndView(data, "filteredByTags");
+
+        }, new ThymeleafTemplateEngine());
+        
+        Spark.post("/byTitle", (req, res) -> {
+            HashMap data = new HashMap<>();
+            
+            data.put("tipsByTitle", dao.getTipsWithTitle(req.queryParams("searchField")));
+            
+            return new ModelAndView(data, "filteredByTitles");
 
         }, new ThymeleafTemplateEngine());
 

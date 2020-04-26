@@ -107,10 +107,10 @@ public class Stepdefs {
 
     @When("the tip is marked as read and toggled again")
     public void theTipIsMarkedAsReadTwice() throws InterruptedException {
-        WebElement element1 = driver.findElement(By.id("luettu1"));
+        WebElement element1 = driver.findElement(By.id("luettu2"));
         WebElement luettubutton1 = element1.findElement(By.linkText("Merkitse"));
         luettubutton1.click();
-        WebElement element2 = driver.findElement(By.id("luettu1"));
+        WebElement element2 = driver.findElement(By.id("luettu2"));
         WebElement luettubutton2 = element2.findElement(By.linkText("Merkitse"));
         luettubutton2.click();
     }
@@ -124,7 +124,7 @@ public class Stepdefs {
     @Then("system will respond with marked as read false")
     public void tipIsMarkedReadFalse() {
         String luettu = "false";
-        assertFalse(driver.getPageSource().contains(luettu));
+        assertTrue(luettu.equals(driver.findElement(By.id("checked2")).getText()));
     }
 
     @Then("system will respond with success")
@@ -183,6 +183,21 @@ public class Stepdefs {
         List<WebElement> rows = driver.findElements(By.xpath(path));
         
         assertEquals(Integer.parseInt(num), rows.size());
+    }
+    
+    @When("search input is filled with title {string}")
+    public void searchInputIsFilledWithTitle(String title) {
+        WebElement element = driver.findElement(By.name("searchField"));
+        element.sendKeys(title);
+        element = driver.findElement(By.name("titleButton"));
+        element.click();
+        
+    }
+    
+    @Then("system will respond with the right title {string} search")
+    public void systemWillRespondWithTheRightTitleSearch(String title) {
+    	assertTrue(driver.getPageSource().contains("Otsikon mukaan löytyneet lukuvinkit"));	
+    	assertTrue(driver.getPageSource().contains(title));
     }
 
     @Given("a reading tip with title {string}, author {string}, description {string}, url {string} and tags {string} is added")

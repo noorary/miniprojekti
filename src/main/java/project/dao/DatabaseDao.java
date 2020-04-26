@@ -85,4 +85,10 @@ public class DatabaseDao implements DaoManager {
         List<Tip> tips = this.tipDao.getTipsWithTag(tag);
         return tips;
     }
+
+    @Override
+    public List<Tip> getTipsWithTitle(String search) throws SQLException {
+    	List<Tip> tips = this.tipDao.getTipsWithTitle(search);
+    	return tips;
+    }
 }
