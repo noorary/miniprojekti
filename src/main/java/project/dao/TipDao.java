@@ -198,8 +198,8 @@ public class TipDao {
     }
     
     public List<Tip> getTipsWithTitle(String search) throws SQLException {
-    	PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip WHERE title = ?");
-    	stmt.setString(1, search);
+    	PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Tip WHERE title LIKE ?");
+    	stmt.setString(1, "%" + sanitize(search) + "%");
         ResultSet result = stmt.executeQuery();
         List<Tip> tips = new ArrayList<>();
         
@@ -218,5 +218,13 @@ public class TipDao {
             tips.add(tip);
         }
         return tips;
+    }
+    
+    public static String sanitize(String input) {
+        return input
+           .replace("!", "!!")
+           .replace("%", "!%")
+           .replace("_", "!_")
+           .replace("[", "![");
     }
 }
