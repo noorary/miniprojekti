@@ -184,6 +184,21 @@ public class Stepdefs {
         
         assertEquals(Integer.parseInt(num), rows.size());
     }
+    
+    @When("search input is filled with title {string}")
+    public void searchInputIsFilledWithTitle(String title) {
+        WebElement element = driver.findElement(By.name("searchField"));
+        element.sendKeys(title);
+        element = driver.findElement(By.name("titleButton"));
+        element.click();
+        
+    }
+    
+    @Then("system will respond with the right title {string} search")
+    public void systemWillRespondWithTheRightTitleSearch(String title) {
+    	assertTrue(driver.getPageSource().contains("Otsikon mukaan löytyneet lukuvinkit"));	
+    	assertTrue(driver.getPageSource().contains(title));
+    }
 
     private void goToTipForm() {
         driver.get(baseUrl);
