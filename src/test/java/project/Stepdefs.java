@@ -247,6 +247,10 @@ public class Stepdefs {
         assertFalse(driver.getPageSource().contains(title));
     }
 
+    @Then("system will save timestamp")
+    public void timestampSaveWorks(){
+        assertTrue(driver.findElement(By.id("checkedtime2")).getText() != null);
+    }
     @And("there is {string} row in the search results")
     public void rightNumberOfRows(String num) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@class='table table-bordered']/tbody/tr")); 
