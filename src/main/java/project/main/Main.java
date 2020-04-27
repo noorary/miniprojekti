@@ -23,7 +23,6 @@ public class Main {
     private static DaoManager dao;
 
     public static void main(String[] args) throws SQLException {
-        System.out.println("Hello world");
 
         if (dao == null) {
             String databaseUrl;
@@ -41,7 +40,6 @@ public class Main {
         Spark.get("/", (req, res) -> {
             HashMap data = new HashMap<>();
             data.put("tips", dao.listAllTips());
-//            data.put("tipsByTag", dao.getTipsWithTag(req.params("tag")));
             return new ModelAndView(data, "index");
         }, new ThymeleafTemplateEngine());
 
