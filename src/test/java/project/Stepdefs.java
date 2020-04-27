@@ -193,6 +193,60 @@ public class Stepdefs {
         
         assertEquals(Integer.parseInt(num), rows.size());
     }
+    
+    @When("search input is filled with title {string}")
+    public void searchInputIsFilledWithTitle(String title) {
+        WebElement element = driver.findElement(By.name("searchField"));
+        element.sendKeys(title);
+        element = driver.findElement(By.name("titleButton"));
+        element.click();
+        
+    }
+    
+    @Then("system will respond with the right title {string} search")
+    public void systemWillRespondWithTheRightTitleSearch(String title) {
+    	assertTrue(driver.getPageSource().contains("Otsikon mukaan löytyneet lukuvinkit"));	
+    	assertTrue(driver.getPageSource().contains(title));
+    }
+
+    @Given("a reading tip with title {string}, author {string}, description {string}, url {string} and tags {string} is added")
+    public void addNewTip2(String title, String author, String description, String url, String tag) {
+        goToTipForm();
+        fillTipInfo(title, author, description, url);
+        fillTagInfo(tag, title);
+        submitForm();
+    }
+
+    @When("search form is filled with name {string}")
+    public void searchByTag(String searchValue) {
+        fillSearchField(searchValue);
+    }
+
+    @And("submit tag search")
+    public void submitTagSearching() {
+        submitTagSearch();
+    }
+
+    @Then("user is redirected to the right page")
+    public void redirectingWorks() {
+        assertTrue(driver.getPageSource().contains("Tägin mukaan löytyneet lukuvinkit"));
+    }
+
+    @Then("results contain tip with title {string} and tag {string}")
+    public void resultsAreRight(String title, String tag) {
+        assertTrue(driver.getPageSource().contains(title) && driver.getPageSource().contains(tag));
+    }
+
+    @Then("results don't contain tip with title {string}")
+    public void resultsDontContain(String title) {
+        assertFalse(driver.getPageSource().contains(title));
+    }
+
+    @And("there is {string} row in the search results")
+    public void rightNumberOfRows(String num) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@class='table table-bordered']/tbody/tr")); 
+        assertEquals(Integer.parseInt(num), rows.size());
+    }
 
     private void goToTipForm() {
         driver.get(baseUrl);
@@ -219,6 +273,16 @@ public class Stepdefs {
 
     private void submitForm() {
         WebElement element = driver.findElement(By.name("submit"));
+        element.click();
+    }
+
+    private void fillSearchField(String searchValue) {
+        WebElement element = driver.findElement(By.name("searchField"));
+        element.sendKeys(searchValue);
+    }
+
+    private void submitTagSearch() {
+        WebElement element = driver.findElement(By.name("tagSearch"));
         element.click();
     }
 
