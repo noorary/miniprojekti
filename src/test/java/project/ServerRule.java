@@ -32,6 +32,9 @@ public class ServerRule extends ExternalResource {
         TagDao tagDao = new TagDao(db);
         DaoManager dao = new DatabaseDao(new TipDao(db, tagDao), tagDao, new TipTagDao(db));
         dao.addTip("Kukkakaali", "tekijä", "onpahan jotain", "www.linkki.com");
+        dao.addTip("Keräkaali", "tekijä", "onpahan jotain", "www.linkki.com");
+        dao.addTip("Ruusukaali", "tekijä", "onpahan jotain", "www.linkki.com");
+        dao.addTip("Porkkana", "tekijä", "onpahan jotain", "www.linkki.com");
         dao.addTip("Refactoring To Patterns", "Joshua Kerievsky", "refaktoroinnista", "https://martinfowler.com/books/r2p.html");
         Main.setDao(dao);
         Main.main(null);

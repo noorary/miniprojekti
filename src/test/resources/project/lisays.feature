@@ -10,8 +10,8 @@ Feature: User can add a reading tip
         When  the tip form is filled without title
         Then  system will respond with failure
 
-    Scenario: tip list works correctly
-        Given page with reading tip form is selected
-        When  all tips are added
-        Then  system will respond with correct list
 
+    Scenario: added tip has correct info
+        Given  a reading tip with title "Gordon cooks", author "Gordon Ramsay", description "Tasty Bacon" and url "www.gordonramsay" is added
+        When  submit tip form
+        Then  results contain tip with title "Gordon cooks", author "Gordon Ramsay", description "Tasty Bacon" and url "www.gordonramsay"

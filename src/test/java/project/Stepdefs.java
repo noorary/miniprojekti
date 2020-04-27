@@ -115,10 +115,19 @@ public class Stepdefs {
         luettubutton2.click();
     }
 
+    @Then("frontpage has all tips added")
+    public void tipListWorks(){
+        String content1 = "Ruusukaali";
+        String content2 = "Keräkaali";
+        String content3 = "Kukkakaali";
+        String content4 = "Porkkana";
+        assertTrue(driver.getPageSource().contains(content1) && driver.getPageSource().contains(content2) && driver.getPageSource().contains(content3) && driver.getPageSource().contains(content4));
+    }
+
     @Then("system will respond with marked as read true")
     public void tipIsMarkedReadTrue() {
         String luettu = "true";
-        assertTrue(driver.getPageSource().contains(luettu));
+        assertTrue(luettu.equals(driver.findElement(By.id("checked1")).getText()));
     }
 
     @Then("system will respond with marked as read false")
@@ -228,16 +237,26 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(title) && driver.getPageSource().contains(tag));
     }
 
+    @Then("results contain tip with title {string}, author {string}, description {string} and url {string}")
+    public void correctAddResult(String title, String author, String description, String url){
+        assertTrue(driver.getPageSource().contains(title) && driver.getPageSource().contains(author) && driver.getPageSource().contains(description) && driver.getPageSource().contains(url));
+
+    }
     @Then("results don't contain tip with title {string}")
     public void resultsDontContain(String title) {
         assertFalse(driver.getPageSource().contains(title));
     }
 
+    @Then("system will save timestamp")
+    public void timestampSaveWorks(){
+        assertTrue(driver.findElement(By.id("checkedtime2")).getText() != null);
+    }
     @And("there is {string} row in the search results")
     public void rightNumberOfRows(String num) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@class='table table-bordered']/tbody/tr")); 
         assertEquals(Integer.parseInt(num), rows.size());
     }
+
 
     private void goToTipForm() {
         driver.get(baseUrl);

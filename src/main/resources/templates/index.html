@@ -61,7 +61,7 @@
                         </div>
                     </td>
                     <td th:text="${tip.checked}" th:id="'checked' + ${tip.id}">checked</td>
-                    <td th:text="${tip.checkedtime}">checkedtime</td>
+                    <td th:text="${tip.checkedtime}" th:id="'checkedtime' + ${tip.id}">checkedtime</td>
                     <td th:id="'luettu' + ${tip.id}">
                         <a th:href="@{~/allTips/markasread/{id}(id=${tip.id})}" class="btn btn-success" role="button">
                             Merkitse
