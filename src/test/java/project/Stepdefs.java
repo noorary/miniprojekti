@@ -237,6 +237,11 @@ public class Stepdefs {
         assertTrue(driver.getPageSource().contains(title) && driver.getPageSource().contains(tag));
     }
 
+    @Then("results contain tip with title {string}, author {string}, description {string} and url {string}")
+    public void correctAddResult(String title, String author, String description, String url){
+        assertTrue(driver.getPageSource().contains(title) && driver.getPageSource().contains(author) && driver.getPageSource().contains(description) && driver.getPageSource().contains(url));
+
+    }
     @Then("results don't contain tip with title {string}")
     public void resultsDontContain(String title) {
         assertFalse(driver.getPageSource().contains(title));
@@ -247,6 +252,7 @@ public class Stepdefs {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@class='table table-bordered']/tbody/tr")); 
         assertEquals(Integer.parseInt(num), rows.size());
     }
+
 
     private void goToTipForm() {
         driver.get(baseUrl);
