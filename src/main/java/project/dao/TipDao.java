@@ -155,13 +155,15 @@ public class TipDao {
             return;
         }
 
+        PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM Tip_tag WHERE tip_id = ?");
+        stmt2.setInt(1, Integer.parseInt(id));
+        stmt2.execute();
+
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM Tip WHERE id = ?");
         stmt.setInt(1, Integer.parseInt(id));
         stmt.execute();
 
-        PreparedStatement stmt2 = conn.prepareStatement("DELETE FROM Tip_tag WHERE tip_id = ?");
-        stmt2.setInt(1, Integer.parseInt(id));
-        stmt2.execute();
+
     }
 
     public List<Tip> getTipsWithTag(String tagName) throws SQLException {
