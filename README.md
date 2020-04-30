@@ -4,6 +4,10 @@
 
 [![codecov](https://codecov.io/gh/noorary/miniprojekti/branch/master/graph/badge.svg)](https://codecov.io/gh/noorary/miniprojekti)
 
+## Loppuraportti
+
+[Raportti](https://docs.google.com/document/d/1SpE9FoA7GtH-zOl1cUN-1cCapzek7qBDIqDkpmRE5lM/edit?usp=sharing)
+
 ## Linkki herokuun
 
 [Heroku](https://ohtuminiprojekti.herokuapp.com/)
